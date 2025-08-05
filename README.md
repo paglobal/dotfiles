@@ -1,0 +1,132 @@
+# TODO
+
+- Add fontconfig
+
+# WISHLIST
+
+- remmina
+- vifm
+- neovim (tar)
+- vim
+- ripgrep
+- fd (tar)
+- fzf (tar)
+- jq
+- poppler
+- zoxide
+- 7zip
+- xclip
+- wl-clipboard
+- resvg (tar)
+- gnome-calendar
+- gnome-calculator
+- gnome-clocks
+- gnome-sound-recorder
+- gnome-startup-applications
+- gnome-system-monitor
+- gnome-settings-daemon
+- gnome-keyring-pkcs11
+- gnome-text-editor
+- gnome-terminal
+- gnome-font-viewer
+- gnome-font-downloader
+- gnome-extension-manager
+- gnome-clipboard-indicator
+- gnome-sound-recorder
+- gnome-contacts (link with google contacts)
+- libre-office
+- blender
+- kitty
+- octave
+- paper-wm
+- hoppscotch
+- rclone
+- shotwell
+- localsend
+- alacritty
+- ffmpeg
+- mpv (https://fruit.je/apt)
+- albert
+- vscode
+- dconf-editor
+- gedit
+- nautilus
+- font-manager
+- fuse3 (appimage)
+- git
+- gh (github-cli)
+- google-chrome
+- imagemagick
+- transmission (torrent stuff)
+- obsidian
+- xournal++
+- rclone
+- warp
+- steam
+- walker
+- blender (snap)
+- emote (snap)
+- firefox (snap)
+- qualculate (snap)
+- spotify (snap)
+- thunderbird (snap)
+- yazi (snap)
+- vlc (snap)
+- flatpak
+- foliate (flatpak)
+- obs-studio (flatpak)
+- audacity (flatpak)
+- inkscape (flatpak)
+- kdenlive (flatpak)
+- krita (flatpak)
+- telegram-desktop (flatpak)
+- http-server (pnpm)
+- tree-sitter-cli (pnpm)
+- turbo (pnpm)
+- neovim (pnpm)
+- typescript (pnpm)
+- tsx (pnpm)
+- lazygit (go)
+- waybar (build)
+- niri (build)
+- mako (build)
+- swaybg
+- swaylock
+- polkit-kde-agent-1
+- jetbrains-mono-nerd-font
+- noto-fonts-emoji
+- xdg-desktop-portal
+- xdg-desktop-portal-gnome
+- plasma-polkit-agent
+- scdoc
+
+- skim
+- navi
+- tldr
+- gum
+- zoxide
+- bat
+- exa
+- playerctl
+- btop
+- yq
+- ytfzf
+- ueberzugpp
+- ddgr
+- buku
+- espanso
+- skate
+- mpv
+- sox
+- atuinsh
+- gear-lever (flathub)
+- kde-connect
+- davinci-resolve
+- wf-recorder
+- open-tablet-driver
+- font-awesome
+- libvips (for image stuff)
+- xwayland-satellite
+- qt5-wayland
+- qt6-wayland
+
