@@ -1,0 +1,40 @@
+max-history=20
+sort=-time
+default-timeout=0
+ignore-timeout=1
+
+# display on top of everything but fullscreen
+max-visible=8
+layer=top
+font=JetBrainsMono NF 10 
+background-color=#171717
+margin=5
+padding=5
+width=400
+height=150
+border-size=2
+border-color=#80c8ff
+border-radius=6
+outer-margin=10
+
+on-button-left=invoke-default-action
+on-touch=invoke-default-action
+on-button-right=dismiss
+on-notify=exec pw-play /usr/share/sounds/freedesktop/stereo/message.oga 
+
+[urgency=low]
+border-color=#ffffff
+
+[urgency=normal]
+border-color=#80c8ff
+
+[urgency=high]
+border-color=#9b0000
+on-notify=exec pw-play ~/assets/sounds/wrong-answer-fail-notification.wav 
+
+[category=no-history]
+history=0
+default-timeout=20000
+
+[mode=do-not-disturb]
+invisible=1
