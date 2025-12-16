@@ -7,4 +7,5 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono NF 
 git config --global user.email "jackamoah.pa@gmail.com"
 git config --global user.name "paglobal"
 
+# may not even be necessary because of chezmoi, but we'll keep it here for other purposes
 chmod +x ~/scripts/*.sh
