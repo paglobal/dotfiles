@@ -304,8 +304,6 @@ binds {
     Mod+Shift+Q     { quit; }
     Ctrl+Alt+Delete { quit; }
 
-    Mod+Shift+M hotkey-overlay-title="Open YT"                         { spawn-sh "google-chrome-stable --app-id=agimnkijcaahngcdmfeangaknmldooml --app-launch-url-for-shortcuts-menu-item=https://www.youtube.com/playlist?list=PL5aUnGmllpivN5rf0dHr3vG9PAZt03YeH"; }
-    Mod+M       hotkey-overlay-title="Open YT Music"                   { spawn-sh "google-chrome-stable --app-id=cinhimbnkkaeohfgghhklpknlkffjgod"; }
     Mod+B       hotkey-overlay-title="Open browser: chrome"            { spawn-sh "google-chrome-stable --ozone-platform-hint=auto"; }
     Mod+Y       hotkey-overlay-title="Open file manager: yazi"         { spawn-sh "kitty -e bash -ic yazi"; }
     Mod+W       hotkey-overlay-title="Open network manager: nmtui"     { spawn-sh "kitty -e nmtui"; }
