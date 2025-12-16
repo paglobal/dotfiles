@@ -1,5 +1,6 @@
 #!/bin/bash
 
+gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 gsettings set org.gnome.desktop.interface color-scheme '"prefer-dark"'
 gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
 gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono NF 11'
