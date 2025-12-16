@@ -3,7 +3,7 @@ Name=Emote
 Type=Application
 GenericName=Emoji picker
 Comment=Modern popup emoji picker
-Exec=env GTK_THEME=Adwaita:dark emote
+Exec=emote
 Categories=Utility;GTK;
 Keywords=emoji,smiley,emoticon,icon
 Icon=emote
