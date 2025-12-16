@@ -11,8 +11,11 @@ brightnessctl
 btop
 chafa
 chezmoi
+dosfstools
 efibootmgr
 emote
+exfatprogs
+fastfetch
 fd
 fuzzel
 fzf
