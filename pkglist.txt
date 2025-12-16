@@ -26,8 +26,8 @@ kiro-bin
 kitty
 lazygit
 libreoffice-still
+lightdm-slick-greeter
 loupe
-ly
 mako
 nano
 neovim
