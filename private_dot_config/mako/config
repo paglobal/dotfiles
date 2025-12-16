@@ -30,7 +30,7 @@ border-color=#80c8ff
 
 [urgency=high]
 border-color=#9b0000
-on-notify=exec pw-play ~/assets/sounds/wrong-answer-fail-notification.wav 
+on-notify=exec pw-play ~/assets/sounds/sci-fi-confirmation.wav 
 
 [category=no-history]
 history=0
