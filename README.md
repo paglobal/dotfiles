@@ -3,6 +3,7 @@
 ## Setup
 
 - Install arch btw
+- Log in as your preferred user
 - Run `sudo pacman -S chezmoi`
 - Run `chezmoi init --apply paglobal`
 - Run `~/scripts/install-yay.sh`
