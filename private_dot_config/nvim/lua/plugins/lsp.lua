@@ -9,11 +9,6 @@ return {
     },
   },
   {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
-  },
-  {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'mason-org/mason.nvim', opts = {} },
@@ -123,7 +118,9 @@ return {
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         -- ts_ls = {},
-        -- vtsls = {},
+        emmet_language_server = {},
+        vtsls = {},
+        html = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

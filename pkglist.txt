@@ -66,6 +66,7 @@ rofi
 smartmontools
 sndio
 sof-firmware
+steam
 swaybg
 swayidle
 swaylock
