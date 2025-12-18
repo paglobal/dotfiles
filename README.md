@@ -7,7 +7,9 @@
 - Run `sudo pacman -S chezmoi`
 - Run `chezmoi init --apply paglobal`
 - Run `~/scripts/install-yay.sh`
-- Update `~/pkglist.txt` according to your needs and preferences
+- Update `~/pkglist.txt` according to your needs and preferences (note
+that certain packages may have certain pre-requisites, like `steam`
+requiring you to enable `multilib`)
 - Run `~/scripts/install-from-pkglist.sh`
 - Edit `~/scripts/idempotent-setup.sh` with your details if
 you're setting up on a machine that doesn't belong to `paglobal`
