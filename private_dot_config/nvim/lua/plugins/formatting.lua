@@ -34,6 +34,7 @@ return {
       html = { 'prettier', 'prettierd', stop_after_first = true },
       css = { 'prettier', 'prettierd', stop_after_first = true },
       json = { 'prettier', 'prettierd', stop_after_first = true },
+      jsonc = { 'prettier', 'prettierd', stop_after_first = true },
       yaml = { 'prettierd', 'prettier' },
       python = { 'isort', 'black' },
     },
