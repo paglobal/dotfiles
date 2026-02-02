@@ -27,18 +27,19 @@ grub
 gst-plugin-pipewire
 haruna
 htop
-hyprpolkitagent
 imagemagick
 inkscape
 iwd
 jq
 kitty
 lazygit
+less
 libpulse
 libreoffice-still
 lightdm
 linux
 linux-firmware
+localsend-bin
 loupe
 ly
 mako
@@ -58,6 +59,7 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
+polkit-kde-agent
 qalculate-gtk
 qbittorrent
 resvg
@@ -76,6 +78,7 @@ ttf-poppins
 ttf-ubuntu-font-family
 ueberzugpp
 unzip
+usbimager
 vim
 visual-studio-code-bin
 vulkan-radeon
