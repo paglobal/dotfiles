@@ -2,7 +2,8 @@
 
 ## Setup
 
-- Install arch btw
+- Install arch btw (desktop type installation with niri is
+recommended)
 - Log in as your preferred user
 - Run `sudo pacman -S chezmoi`
 - Run `chezmoi init --apply paglobal`
