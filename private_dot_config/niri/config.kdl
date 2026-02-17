@@ -198,7 +198,7 @@ window-rule {
 // For dms
 window-rule {
     match is-active=false
-    opacity 0.9
+    opacity 0.8
 }
 
 // For dms: open windows as floating by default
@@ -286,10 +286,12 @@ binds {
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
-    Mod+X       { switch-preset-column-width; }
-    Mod+Z       { switch-preset-window-height; }
+    Mod+Z       { switch-preset-column-width; }
+    Mod+X       { switch-preset-window-height; }
     Mod+F       { toggle-windowed-fullscreen; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+M       { maximize-window-to-edges; }
+    Mod+Shift+M { maximize-column; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
