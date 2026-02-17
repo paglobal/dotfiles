@@ -123,7 +123,7 @@ layout {
     default-column-width {}
 
     focus-ring {
-        width 3
+        width 2
         active-gradient from="#80c8ff" to="#404040" angle=45
         inactive-color "#505050"
         urgent-color "#9b0000"
