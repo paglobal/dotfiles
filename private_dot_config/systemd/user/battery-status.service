@@ -1,6 +1,0 @@
-[Unit]
-Description=Show battery percentage
-
-[Service]
-Type=oneshot
-ExecStart=%h/scripts/notify-battery-status.sh

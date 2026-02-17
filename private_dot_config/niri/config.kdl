@@ -92,7 +92,6 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 10
-
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -100,9 +99,7 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     center-focused-column "on-overflow"
-
     always-center-single-column
-
     background-color "transparent"
 
     preset-column-widths {
@@ -179,31 +176,52 @@ window-rule {
 }
 
 window-rule {
-    match app-id="ueli" title="Ueli"
-    open-floating true
-    open-focused true 
-}
-
-window-rule {
     geometry-corner-radius 8 
     clip-to-geometry true
+}
+
+// For dms
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// For dms
+window-rule {
+    match app-id="Alacritty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+// For dms
+window-rule {
+    match is-active=false
+    opacity 0.9
+}
+
+// For dms: open windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
 }
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     
-    XF86AudioRaiseVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
-    Ctrl+Alt+BracketRight       allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
-    XF86AudioLowerVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
-    Ctrl+Alt+BracketLeft        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
-    XF86AudioMute               allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
-    XF86AudioMicMute            allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
-    XF86MonBrightnessUp         allow-when-locked=true { spawn "swayosd-client" "--brightness" "+2"; }
-    XF86MonBrightnessDown       allow-when-locked=true { spawn "swayosd-client" "--brightness" "-2"; }
-    XF86AudioPlay               allow-when-locked=true { spawn "swayosd-client" "--playerctl" "play-pause"; }
-    Ctrl+Alt+P                  allow-when-locked=true { spawn "swayosd-client" "--playerctl" "play-pause"; }
-    Ctrl+Alt+Shift+BracketRight allow-when-locked=true { spawn "swayosd-client" "--input-volume" "raise"; }
-    Ctrl+Alt+Shift+BracketLeft  allow-when-locked=true { spawn "swayosd-client" "--input-volume" "lower"; }
+    XF86AudioRaiseVolume        allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    Ctrl+Alt+BracketRight       allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    XF86AudioLowerVolume        allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    Ctrl+Alt+BracketLeft        allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    XF86AudioMute               allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
+    XF86AudioMicMute            allow-when-locked=true { spawn-sh "dms ipc call audio micmute"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn-sh "dms ipc call brightness increment 5 \"\""; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn-sh "dms ipc call brightness decrement 5 \"\""; }
+    XF86AudioPlay               allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    Ctrl+Alt+P                  allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    Ctrl+Alt+Shift+BracketRight allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
+    Ctrl+Alt+Shift+BracketLeft  allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
 
     Mod+O repeat=false { toggle-overview; }
 
@@ -265,9 +283,6 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
 
-    Alt+Tab { focus-window-previous; }
-    Mod+Tab { focus-workspace-previous; }
-
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
@@ -287,10 +302,6 @@ binds {
 
     Mod+T { toggle-column-tabbed-display; }
 
-    Print      { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print  { screenshot-window; }
-
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
     // so they may, for example, forward the key presses as-is to a remote machine.
@@ -304,46 +315,78 @@ binds {
     Mod+Shift+Q     { quit; }
     Ctrl+Alt+Delete { quit; }
 
-    Mod+B       hotkey-overlay-title="Open browser: chrome"            { spawn-sh "google-chrome-stable --ozone-platform-hint=auto"; }
-    Mod+Y       hotkey-overlay-title="Open file manager: yazi"         { spawn-sh "kitty -e bash -ic yazi"; }
-    Mod+W       hotkey-overlay-title="Open network manager: nmtui"     { spawn-sh "kitty -e nmtui"; }
-    Mod+Shift+B hotkey-overlay-title="Open bluetooth manager: bluetui" { spawn-sh "kitty -e bluetui"; }
-    Mod+P       hotkey-overlay-title="Pick color"                      { spawn-sh "niri msg pick-color | wl-copy"; }
-    Alt+Space   hotkey-overlay-title="Run an application: rofi"        { spawn-sh "rofi -show combi -modes combi -combi-modes 'window,drun,run'"; }
-    Mod+Return  hotkey-overlay-title="Open a terminal: kitty"          { spawn "kitty"; }
-    Mod+Alt+L   hotkey-overlay-title="Lock the screen: swaylock"       { spawn "swaylock"; }
-    Mod+S       hotkey-overlay-title="Show minimal stats"              { spawn "~/scripts/notify-battery-status.sh"; }
-    Mod+C       hotkey-overlay-title="Open code editor: vscode"        { spawn "code"; }
-    Mod+E       hotkey-overlay-title="Open file manager: nautilus"     { spawn "nautilus"; }
-    Mod+Period  hotkey-overlay-title="Open emoji picker: emote"        { spawn "emote"; }
-
-    Mod+N            hotkey-overlay-title="Notifications: restore"      { spawn-sh "makoctl restore"; }
-    Mod+Shift+N      hotkey-overlay-title="Notifications: dismiss"      { spawn-sh "makoctl dismiss"; }
-    Ctrl+Mod+N       hotkey-overlay-title="Notifications: invoke"       { spawn-sh "makoctl invoke"; }
-    Ctrl+Mod+Shift+N hotkey-overlay-title="Notifications: reload"       { spawn-sh "makoctl reload"; }
-    // Add controls for toggle dnd with alt key
-}
-
-environment {
-    ELECTRON_OZONE_PLATFORM_HINT "auto"
-    QT_QPA_PLATFORM "wayland"
+    Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
+    Mod+Shift+B     hotkey-overlay-title="Toggle keybinds: niri & dms"      { spawn-sh "dms ipc call keybinds toggle niri"; }
+    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "kitty -e bash -ic yazi"; }
+    Mod+W           hotkey-overlay-title="Toggle control center: dms"       { spawn-sh "dms ipc call control-center toggle"; }
+    Mod+P           hotkey-overlay-title="Open color picker: dms"           { spawn-sh "dms color pick -a"; }
+    Mod+Shift+P     hotkey-overlay-title="Toggle power menu: dms"           { spawn-sh "dms ipc call powermenu toggle"; }
+    Alt+Space       hotkey-overlay-title="Toggle spotlight: dms"            { spawn-sh "dms ipc call spotlight toggle"; }
+    Mod+Return      hotkey-overlay-title="Open a terminal: kitty"           { spawn-sh "kitty"; }
+    Mod+S           hotkey-overlay-title="Toggle screen widgets: dms"       { spawn-sh "dms ipc call bar toggle index 0"; }
+    Mod+Shift+S     hotkey-overlay-title="Toggle settings: dms"             { spawn-sh "dms ipc call settings toggle"; }
+    Mod+C           hotkey-overlay-title="Open code editor: vscode"         { spawn-sh "code"; }
+    Mod+E           hotkey-overlay-title="Open file manager: nautilus"      { spawn-sh "nautilus"; }
+    Mod+Period      hotkey-overlay-title="Open emoji picker: emote"         { spawn-sh "emote"; }
+    Mod+N           hotkey-overlay-title="Toggle notification center: dms"  { spawn-sh "dms ipc call notifications toggle"; }
+    Mod+Shift+N     hotkey-overlay-title="Dismiss popup notifications: dms" { spawn-sh "dms ipc call notifications dismissAllPopups"; }
+    Mod+D           hotkey-overlay-title="Toggle dash: dms"                 { spawn-sh "dms ipc call dash toggle media"; }
+    Mod+V           hotkey-overlay-title="Toggle clipboard: dms"            { spawn-sh "dms ipc call clipboard toggle"; }
+    Print           hotkey-overlay-title="Screenshot: dms"                  { spawn-sh "dms screenshot --stdout | satty -f - -o ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"; }
+    Mod+Print       hotkey-overlay-title="Screenshot screen: dms"           { spawn-sh "dms screenshot full --stdout | satty -f - -o ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png";  }
+    Mod+Shift+Print hotkey-overlay-title="Screenshot window: niri"          { screenshot-window;  }
 }
 
 hotkey-overlay {
     skip-at-startup
 }
 
+// For dms
 layer-rule {
-    match namespace="^wallpaper$"
-
+    match namespace="^quickshell$"
     place-within-backdrop true
+}
+
+// For dms
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// For dms: block out sensitive components from screencasts
+layer-rule {
+    match namespace="^dms:clipboard$"
+    match namespace="^dms:notification-popup$"
+    match namespace="^dms:toast$"
+    block-out-from "screencast"
 }
 
 overview {
     zoom 0.4
 }
 
-spawn-sh-at-startup "swayosd-server"
-spawn-sh-at-startup "google-chrome-stable --ozone-platform-hint=auto"
-spawn-sh-at-startup "kitty -e bash -ic yazi"
+switch-events {
+    tablet-mode-on  { spawn "bash" "-c" "dms ipc call bar reveal index 0 && dms ipc call dock manualHide"; }
+    tablet-mode-off { spawn "bash" "-c" "dms ipc call bar hide index 0 && dms ipc call dock autoHide && ~/scripts/kill-osk.sh"; }
+}
+
+// Commented out in `environment.d/90-dms.conf`
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
+// For dms: clipboard history
+spawn-sh-at-startup "bash -c wl-paste --watch cliphist store &"
 // spawn-sh-at-startup "obsidian"
+// For dms: colors
+include "dms/colors.kdl"
+// For dms: cursor config
+include "dms/cursor.kdl"
+// For dms: outputs config
+include "dms/outputs.kdl"
+// For dms: alttab config
+include "dms/alttab.kdl"

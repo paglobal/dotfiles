@@ -1,0 +1,72 @@
+{
+  "dankLauncherKeys": {
+    "enabled": true,
+    "noTrigger": false
+  },
+  "dankHooks": {
+    "enabled": true
+  },
+  "dankPomodoroTimer": {
+    "enabled": true,
+    "autoStartBreaks": true,
+    "autoStartPomodoros": true,
+    "autoSetDND": true,
+    "workDuration": "40",
+    "shortBreakDuration": "5"
+  },
+  "dankActions": {
+    "enabled": true,
+    "variants": [
+      {
+        "icon": "keyboard",
+        "displayText": "Toggle OSK",
+        "displayCommand": "",
+        "clickCommand": "~/scripts/toggle-osk.sh",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": false,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1771172791173",
+        "name": "Toggle OSK"
+      },
+      {
+        "icon": "computer",
+        "displayText": "Overview",
+        "displayCommand": "",
+        "clickCommand": "niri msg action toggle-overview",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": false,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1771174610668",
+        "name": "Toggle Niri Overview"
+      },
+      {
+        "icon": "terminal",
+        "displayText": "Close",
+        "displayCommand": "",
+        "clickCommand": "niri msg action close-window",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": false,
+        "showText": true,
+        "visibilityCommand": "",
+        "visibilityInterval": 0,
+        "id": "variant_1771175642073",
+        "name": "Close Focused Program"
+      }
+    ]
+  },
+  "dankBatteryAlerts": {
+    "enabled": true,
+    "criticalThreshold": 30,
+    "warningThreshold": 50
+  }
+}

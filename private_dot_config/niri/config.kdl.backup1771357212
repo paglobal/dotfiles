@@ -1,0 +1,389 @@
+input {
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+
+            // For example:
+            // layout "us,ru"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+        }
+
+        // Enable numlock on startup, omitting this setting disables it.
+        numlock
+    }
+
+    // Next sections include libinput settings.
+    // Omitting settings disables them, or leaves them at their default values.
+    touchpad {
+        // off
+        tap
+        dwt
+        // dwtp
+        // drag false
+        // drag-lock
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+
+    mouse {
+        // off
+        // natural-scroll
+        accel-speed -0.8
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+
+    trackpoint {
+        // off
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "on-button-down"
+        // scroll-button 273
+        // middle-emulation
+    }
+
+    // Uncomment this to make the mouse warp to the center of newly focused windows.
+    warp-mouse-to-focus
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
+    // focus-follows-mouse max-scroll-amount="0%"
+}
+
+// You can configure outputs by their name, which you can find
+// by running `niri msg outputs` while inside a niri instance.
+// The built-in laptop monitor is usually called "eDP-1".
+/-output "eDP-1" {
+    // Uncomment this line to disable this output.
+    // off
+
+    // Resolution and, optionally, refresh rate of the output.
+    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+    // If the refresh rate is omitted, niri will pick the highest refresh rate
+    // for the resolution.
+    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    mode "1920x1080@120.030"
+
+    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+    scale 2
+
+    // Transform allows to rotate the output counter-clockwise, valid values are:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
+
+    // Position of the output in the global coordinate space.
+    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+    // The cursor can only move between directly adjacent outputs.
+    // Output scale and rotation has to be taken into account for positioning:
+    // outputs are sized in logical, or scaled, pixels.
+    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+    // so to put another output directly adjacent to it on the right, set its x to 1920.
+    // If the position is unset or results in an overlap, the output is instead placed
+    // automatically.
+    position x=1280 y=0
+}
+
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 10
+    // When to center a column when changing focus, options are:
+    // - "never", default behavior, focusing an off-screen column will keep at the left
+    //   or right edge of the screen.
+    // - "always", the focused column will always be centered.
+    // - "on-overflow", focusing a column will center it if it doesn't fit
+    //   together with the previously focused column.
+    center-focused-column "on-overflow"
+    always-center-single-column
+    background-color "transparent"
+
+    preset-column-widths {
+        proportion 0.25
+        proportion 0.5
+        proportion 0.75
+        proportion 1.0
+
+        // Fixed sets the width in logical pixels exactly.
+        // fixed 1920
+    }
+
+    preset-window-heights { 
+        proportion 0.25
+        proportion 0.5
+        proportion 0.75
+        proportion 1.0
+    }
+
+    // default-column-width { proportion 0.5; }
+    default-column-width {}
+
+    focus-ring {
+        width 3
+        active-gradient from="#80c8ff" to="#404040" angle=45
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+
+    // You can also add a border. It's similar to the focus ring, but always visible.
+    /-border {
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+
+    // You can enable drop shadows for windows.
+    shadow {
+        on
+        softness 30
+        spread 5
+        offset x=5 y=5
+        color "#0007"
+    }
+
+    /-struts {
+        left 64
+        right 64
+        top 64
+        bottom 64
+    }
+}
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+// screenshot-path null
+
+animations {
+    // off
+    slowdown 0.5 
+}
+
+window-rule {
+    match app-id="" title="Picture in picture"
+    open-floating true
+    open-focused false
+    default-floating-position x=25 y=25 relative-to="bottom-right"
+    default-window-height { proportion 0.3; }
+    default-column-width  { proportion 0.25; }
+}
+
+window-rule {
+    geometry-corner-radius 8 
+    clip-to-geometry true
+}
+
+// For dms
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// For dms
+window-rule {
+    match app-id="Alacritty"
+    match app-id="kitty"
+    draw-border-with-background false
+}
+
+// For dms
+window-rule {
+    match is-active=false
+    opacity 0.9
+}
+
+// For dms: open windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    
+    XF86AudioRaiseVolume        allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    Ctrl+Alt+BracketRight       allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    XF86AudioLowerVolume        allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    Ctrl+Alt+BracketLeft        allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    XF86AudioMute               allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
+    XF86AudioMicMute            allow-when-locked=true { spawn-sh "dms ipc call audio micmute"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn-sh "dms ipc call brightness increment 5 \"\""; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn-sh "dms ipc call brightness decrement 5 \"\""; }
+    XF86AudioPlay               allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    Ctrl+Alt+P                  allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    Ctrl+Alt+Shift+BracketRight allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
+    Ctrl+Alt+Shift+BracketLeft  allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Q  { close-window; }
+    Alt+F4 { close-window; }
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L { move-column-right; }
+
+    Mod+Left  { focus-monitor-left; }
+    Mod+Down  { focus-monitor-down; }
+    Mod+Up    { focus-monitor-up; }
+    Mod+Right { focus-monitor-right; }
+
+    Mod+Shift+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Right { move-column-to-monitor-right; }
+
+    Mod+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Down  { move-workspace-down; }
+    Mod+Ctrl+Up    { move-workspace-up; }
+    Mod+Ctrl+Right { move-workspace-to-monitor-right; }
+
+    Mod+WheelScrollDown       cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp         cooldown-ms=150 { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight       { focus-column-right; }
+    Mod+WheelScrollLeft        { focus-column-left; }
+    Mod+Shift+WheelScrollRight { move-column-right; }
+    Mod+Shift+WheelScrollLeft  { move-column-left; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+X       { switch-preset-column-width; }
+    Mod+Z       { switch-preset-window-height; }
+    Mod+F       { toggle-windowed-fullscreen; }
+    Mod+Shift+F { fullscreen-window; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+Shift+Space { toggle-window-floating; }
+    Mod+Space       { switch-focus-between-floating-and-tiling; }
+
+    Mod+T { toggle-column-tabbed-display; }
+
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here
+    // so they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor,
+    // so a buggy application can't hold your session hostage.
+    //
+    // The allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is active.
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    Mod+Shift+Q     { quit; }
+    Ctrl+Alt+Delete { quit; }
+
+    Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
+    Mod+Shift+B     hotkey-overlay-title="Toggle keybinds: niri & dms"      { spawn-sh "dms ipc call keybinds toggle niri"; }
+    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "kitty -e bash -ic yazi"; }
+    Mod+W           hotkey-overlay-title="Toggle control center: dms"       { spawn-sh "dms ipc call control-center toggle"; }
+    Mod+P           hotkey-overlay-title="Open color picker: dms"           { spawn-sh "dms color pick -a"; }
+    Mod+Shift+P     hotkey-overlay-title="Toggle power menu: dms"           { spawn-sh "dms ipc call powermenu toggle"; }
+    Alt+Space       hotkey-overlay-title="Toggle spotlight: dms"            { spawn-sh "dms ipc call spotlight toggle"; }
+    Mod+Return      hotkey-overlay-title="Open a terminal: kitty"           { spawn-sh "kitty"; }
+    Mod+S           hotkey-overlay-title="Toggle screen widgets: dms"       { spawn-sh "dms ipc call bar toggle index 0"; }
+    Mod+Shift+S     hotkey-overlay-title="Toggle settings: dms"             { spawn-sh "dms ipc call settings toggle"; }
+    Mod+C           hotkey-overlay-title="Open code editor: vscode"         { spawn-sh "code"; }
+    Mod+E           hotkey-overlay-title="Open file manager: nautilus"      { spawn-sh "nautilus"; }
+    Mod+Period      hotkey-overlay-title="Open emoji picker: emote"         { spawn-sh "emote"; }
+    Mod+N           hotkey-overlay-title="Toggle notification center: dms"  { spawn-sh "dms ipc call notifications toggle"; }
+    Mod+Shift+N     hotkey-overlay-title="Dismiss popup notifications: dms" { spawn-sh "dms ipc call notifications dismissAllPopups"; }
+    Mod+D           hotkey-overlay-title="Toggle dash: dms"                 { spawn-sh "dms ipc call dash toggle media"; }
+    Mod+V           hotkey-overlay-title="Toggle clipboard: dms"            { spawn-sh "dms ipc call clipboard toggle"; }
+    Print           hotkey-overlay-title="Screenshot: niri & dms"           { spawn-sh "dms ipc call niri screenshot"; }
+    Mod+Print       hotkey-overlay-title="Screenshot screen: niri & dms"    { spawn-sh "dms ipc call niri screenshotScreen";  }
+    Mod+Shift+Print hotkey-overlay-title="Screenshot window: niri & dms"    { spawn-sh "dms ipc call niri screenshotWindow";  }
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// For dms
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+// For dms
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// For dms: block out sensitive components from screencasts
+layer-rule {
+    match namespace="^dms:clipboard$"
+    match namespace="^dms:notification-popup$"
+    match namespace="^dms:toast$"
+    block-out-from "screencast"
+}
+
+overview {
+    zoom 0.4
+}
+
+switch-events {
+    tablet-mode-on  { spawn "bash" "-c" "dms ipc call bar reveal index 0 && dms ipc call dock manualHide"; }
+    tablet-mode-off { spawn "bash" "-c" "dms ipc call bar hide index 0 && dms ipc call dock autoHide && ~/scripts/kill-osk.sh"; }
+}
+
+// Commented out in `environment.d/90-dms.conf`
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    DMS_SCREENSHOT_EDITOR "satty"
+}
+
+// For dms: clipboard history
+spawn-sh-at-startup "bash -c wl-paste --watch cliphist store &"
+// spawn-sh-at-startup "obsidian"
+// For dms: colors
+include "dms/colors.kdl"
+// For dms: cursor config
+include "dms/cursor.kdl"
