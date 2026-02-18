@@ -314,25 +314,25 @@ binds {
     // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Mod+Shift+Q     { quit; }
     Ctrl+Alt+Delete { quit; }
 
     Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
-    Mod+Shift+B     hotkey-overlay-title="Toggle keybinds: niri & dms"      { spawn-sh "dms ipc call keybinds toggle niri"; }
+    Mod+Shift+B     hotkey-overlay-title="Toggle battery manager: dms"      { spawn-sh "dms ipc call widget toggle battery"; }
     Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "kitty -e bash -ic yazi"; }
     Mod+W           hotkey-overlay-title="Toggle control center: dms"       { spawn-sh "dms ipc call control-center toggle"; }
     Mod+P           hotkey-overlay-title="Open color picker: dms"           { spawn-sh "dms color pick -a"; }
-    Mod+Shift+P     hotkey-overlay-title="Toggle power menu: dms"           { spawn-sh "dms ipc call powermenu toggle"; }
+    Mod+Shift+P     hotkey-overlay-title="Toggle pomodoro timer: dms"       { spawn-sh "dms ipc call widget toggle dankPomodoroTimer"; }
+    Mod+Shift+Q     hotkey-overlay-title="Toggle power menu: dms"           { spawn-sh "dms ipc call powermenu toggle"; }
     Alt+Space       hotkey-overlay-title="Toggle spotlight: dms"            { spawn-sh "dms ipc call spotlight toggle"; }
     Mod+Return      hotkey-overlay-title="Open a terminal: kitty"           { spawn-sh "kitty"; }
-    Mod+S           hotkey-overlay-title="Toggle screen widgets: dms"       { spawn-sh "dms ipc call bar toggle index 0"; }
-    Mod+Shift+S     hotkey-overlay-title="Toggle settings: dms"             { spawn-sh "dms ipc call settings toggle"; }
+    Mod+S           hotkey-overlay-title="Toggle settings: dms"             { spawn-sh "dms ipc call settings toggle"; }
+    Mod+Shift+S     hotkey-overlay-title="Toggle screen widgets: dms"       { spawn-sh "dms ipc call bar toggle index 0"; }
     Mod+C           hotkey-overlay-title="Open code editor: vscode"         { spawn-sh "code"; }
     Mod+E           hotkey-overlay-title="Open file manager: nautilus"      { spawn-sh "nautilus"; }
     Mod+Period      hotkey-overlay-title="Open emoji picker: emote"         { spawn-sh "emote"; }
     Mod+N           hotkey-overlay-title="Toggle notification center: dms"  { spawn-sh "dms ipc call notifications toggle"; }
     Mod+Shift+N     hotkey-overlay-title="Dismiss popup notifications: dms" { spawn-sh "dms ipc call notifications dismissAllPopups"; }
-    Mod+D           hotkey-overlay-title="Toggle dash: dms"                 { spawn-sh "dms ipc call dash toggle media"; }
+    Mod+D           hotkey-overlay-title="Toggle dash: dms"                 { spawn-sh "dms ipc call dash toggle overview"; }
     Mod+V           hotkey-overlay-title="Toggle clipboard: dms"            { spawn-sh "dms ipc call clipboard toggle"; }
     Print           hotkey-overlay-title="Screenshot: dms"                  { spawn-sh "dms screenshot --stdout | satty -f - -o ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"; }
     Mod+Print       hotkey-overlay-title="Screenshot screen: dms"           { spawn-sh "dms screenshot full --stdout | satty -f - -o ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png";  }
@@ -390,5 +390,7 @@ include "dms/colors.kdl"
 include "dms/cursor.kdl"
 // For dms: outputs config
 include "dms/outputs.kdl"
-// For dms: alttab config
+// For dms: alt-tab config
 include "dms/alttab.kdl"
+// For dms: window rules config
+include "dms/windowrules.kdl"

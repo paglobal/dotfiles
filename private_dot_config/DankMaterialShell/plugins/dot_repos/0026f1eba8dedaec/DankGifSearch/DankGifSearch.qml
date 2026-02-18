@@ -168,7 +168,10 @@ QtObject {
         const url = getPreferredUrl(urls);
         if (!url)
             return;
-        Quickshell.execDetached(["dms", "cl", "copy", url]);
+        if (pasteUrlOnly)
+            Quickshell.execDetached(["dms", "cl", "copy", url]);
+        else
+            Quickshell.execDetached(["dms", "cl", "copy", "--download", url]);
         ToastService.showInfo(I18n.tr("Copied to clipboard"));
     }
 

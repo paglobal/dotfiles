@@ -8,11 +8,12 @@
   },
   "dankPomodoroTimer": {
     "enabled": true,
-    "autoStartBreaks": true,
-    "autoStartPomodoros": true,
-    "autoSetDND": true,
-    "workDuration": "40",
-    "shortBreakDuration": "5"
+    "autoStartBreaks": false,
+    "autoStartPomodoros": false,
+    "autoSetDND": false,
+    "workDuration": "25",
+    "shortBreakDuration": "5",
+    "completedPomodoros-2026-02-17": 1
   },
   "dankActions": {
     "enabled": true,

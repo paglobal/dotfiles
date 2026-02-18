@@ -21,7 +21,7 @@ PluginComponent {
     onPluginServiceChanged: {
         if (pluginService) {
             currentDateKey = formatDateKey(new Date())
-            globalCompletedPomodoros.set(pluginService.loadPluginData("dankPomodoroTimer", "completedPomodoros-" + currentDateKey, 0))
+            globalCompletedPomodoros.set(pluginService.loadPluginState("dankPomodoroTimer", "completedPomodoros-" + currentDateKey))
             loadLast7Days()
         }
     }
@@ -36,7 +36,7 @@ PluginComponent {
             if (newDateKey !== root.currentDateKey) {
                 root.currentDateKey = newDateKey
                 if (pluginService) {
-                    globalCompletedPomodoros.set(pluginService.loadPluginData("dankPomodoroTimer", "completedPomodoros-" + newDateKey, 0))
+                    globalCompletedPomodoros.set(pluginService.loadPluginState("dankPomodoroTimer", "completedPomodoros-" + newDateKey))
                     loadLast7Days()
                 }
             }
@@ -66,7 +66,7 @@ PluginComponent {
             if (dateKey === todayKey) {
                 count = globalCompletedPomodoros.value
             } else {
-                count = pluginService.loadPluginData("dankPomodoroTimer", "completedPomodoros-" + dateKey, 0)
+                count = pluginService.loadPluginState("dankPomodoroTimer", "completedPomodoros-" + dateKey)
             }
 
             data.push({
@@ -93,9 +93,9 @@ PluginComponent {
             const dateKey = formatDateKey(date)
             const key = "completedPomodoros-" + dateKey
 
-            const value = pluginService.loadPluginData("dankPomodoroTimer", key, null)
+            const value = pluginService.loadPluginState("dankPomodoroTimer", key)
             if (value !== null) {
-                pluginService.savePluginData("dankPomodoroTimer", key, undefined)
+                pluginService.savePluginState("dankPomodoroTimer", key, undefined)
             }
         }
     }
@@ -185,7 +185,7 @@ PluginComponent {
             globalCompletedPomodoros.set(globalCompletedPomodoros.value + 1)
             if (pluginService) {
                 const dateKey = formatDateKey(new Date())
-                pluginService.savePluginData("dankPomodoroTimer", "completedPomodoros-" + dateKey, globalCompletedPomodoros.value)
+                pluginService.savePluginState("dankPomodoroTimer", "completedPomodoros-" + dateKey, globalCompletedPomodoros.value)
                 loadLast7Days()
             }
             const isLongBreak = globalCompletedPomodoros.value % 4 === 0

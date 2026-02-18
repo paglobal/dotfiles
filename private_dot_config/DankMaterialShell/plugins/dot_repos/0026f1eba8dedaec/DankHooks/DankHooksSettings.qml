@@ -129,6 +129,22 @@ PluginSettings {
     }
 
     StringSetting {
+        settingKey: "sessionLocked"
+        label: "Session Locked"
+        description: "Hook: onSessionLocked | Value: 'locked'"
+        placeholder: "/path/to/session-locked-hook.sh"
+        defaultValue: ""
+    }
+
+    StringSetting {
+        settingKey: "sessionUnlocked"
+        label: "Session Unlocked"
+        description: "Hook: onSessionUnlocked | Value: 'unlocked'"
+        placeholder: "/path/to/session-unlocked-hook.sh"
+        defaultValue: ""
+    }
+
+    StringSetting {
         settingKey: "hookPowerMonitorOff"
         label: "Monitor Off Event Triggered"
         description: "Hook: onRequestMonitorOff | Value: empty"

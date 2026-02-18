@@ -2,7 +2,7 @@
     "id": "dankStickerSearch",
     "name": "Sticker Search",
     "description": "Search and browse stickers powered by Klipy",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "author": "Avenge Media",
     "icon": "sentiment_satisfied",
     "type": "launcher",

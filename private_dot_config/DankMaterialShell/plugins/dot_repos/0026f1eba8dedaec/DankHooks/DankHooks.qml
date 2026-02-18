@@ -34,6 +34,8 @@ PluginComponent {
     property string hookMediaPlaying: pluginData.mediaPlaying || ""
     property string hookIdleStateActive: pluginData.idleStateActive || ""
     property string hookMonitorWallpaper: pluginData.monitorWallpaper || ""
+    property string hookSessionLocked: pluginData.sessionLocked || ""
+    property string hookSessionUnlocked: pluginData.sessionUnlocked || ""
 
     Connections {
         target: SessionData
@@ -75,6 +77,18 @@ PluginComponent {
         function onInhibitorChanged() {
             if (hookIdleInhibit) {
                 executeHook(hookIdleInhibit, "onInhibitorChanged", SessionService.idleInhibited ? "inhibited" : "not-inhibited");
+            }
+        }
+
+        function onSessionLocked() {
+            if (hookSessionLocked) {
+                executeHook(hookSessionLocked, "onSessionLocked", "locked");
+            }
+        }
+
+        function onSessionUnlocked() {
+            if (hookSessionUnlocked) {
+                executeHook(hookSessionUnlocked, "onSessionUnlocked", "unlocked");
             }
         }
     }

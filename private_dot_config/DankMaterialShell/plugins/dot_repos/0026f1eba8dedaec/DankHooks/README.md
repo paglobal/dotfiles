@@ -19,6 +19,8 @@
 | **Battery Level Changed** | When battery percentage changes | `onBatteryLevelChanged` | Battery percentage (0-100) |
 | **Battery Charging State Changed** | When charging state changes | `onBatteryChargingChanged` | `charging` or `not-charging` |
 | **Power Adapter Changed** | When power adapter connects/disconnects | `onBatteryPluggedInChanged` | `plugged-in` or `on-battery` |
+| **Session Locked** | When session becomes locked | `onSessionLocked` | `locked` |
+| **Session Unlocked** | When session becomes unlocked | `onSessionUnlocked` | `unlocked` |
 
 ### Network
 
