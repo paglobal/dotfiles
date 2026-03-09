@@ -1,0 +1,60 @@
+// For NS
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+// For NS 
+binds {
+    XF86AudioRaiseVolume        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    Ctrl+Alt+BracketRight       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    XF86AudioLowerVolume        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    Ctrl+Alt+BracketLeft        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    XF86AudioMute               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+    XF86AudioMicMute            allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    XF86AudioPlay               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call mpris playPause"; }
+    Ctrl+Alt+P                  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call mpris playPause"; }
+
+    Mod+Shift+P     hotkey-overlay-title="Toggle battery manager: ns"        { spawn-sh "qs -c noctalia-shell ipc call battery togglePanel"; }
+    Mod+W           hotkey-overlay-title="Toggle network panel: ns"          { spawn-sh "qs -c noctalia-shell ipc call network togglePanel"; }
+    Mod+Shift+B     hotkey-overlay-title="Toggle bluetooth panel: ns"        { spawn-sh "qs -c noctalia-shell ipc call bluetooth togglePanel"; }
+    Mod+Shift+T     hotkey-overlay-title="Toggle timer utilities: ns"        { spawn-sh "qs -c noctalia-shell ipc call plugin:timer toggle"; }
+    Mod+Shift+Q     hotkey-overlay-title="Toggle session menu: ns"           { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Alt+Space       hotkey-overlay-title="Toggle launcher: ns"               { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+S           hotkey-overlay-title="Toggle settings: ns"               { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+    Mod+Shift+S     hotkey-overlay-title="Toggle bar: ns"                    { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    Mod+Shift+W     hotkey-overlay-title="Toggle system monitor: ns"         { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
+    Mod+N           hotkey-overlay-title="Toggle notifications history: ns"  { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
+    Mod+Shift+N     hotkey-overlay-title="Dismiss active notifications: ns"  { spawn-sh "qs -c noctalia-shell ipc call notifications dismissAll"; }
+    Mod+D           hotkey-overlay-title="Toggle calendar: ns"               { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
+    Mod+Shift+D     hotkey-overlay-title="Toggle dock: ns"                   { spawn-sh "qs -c noctalia-shell ipc call dock toggle"; }
+    Mod+V           hotkey-overlay-title="Toggle clipboard: ns"              { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+}
+
+// For NS 
+// TODO: change to dock show and hide once implemented
+switch-events {
+    tablet-mode-on  { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar showBar && qs -c noctalia-shell ipc call dock toggle"; }
+    tablet-mode-off { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar hideBar && qs -c noctalia-shell ipc call dock toggle && ~/scripts/kill-osk.sh"; }
+}
+
+// For NS
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+// For NS
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+// For NS
+spawn-sh-at-startup "qs -c noctalia-shell"

@@ -117,6 +117,9 @@ return {
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         -- ts_ls = {},
+        qmlls = {
+          cmd = { '/usr/lib/qt6/bin/qmlls' },
+        },
         gopls = {},
         emmet_language_server = {},
         vtsls = {},
@@ -137,6 +140,12 @@ return {
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
+
+      -- Filter out unwanted servers
+      ensure_installed = vim.tbl_filter(function(key)
+        return not vim.tbl_contains({ 'qmlls' }, key)
+      end, ensure_installed)
+
       vim.list_extend(ensure_installed, {
         'stylua',
       })
@@ -154,6 +163,11 @@ return {
           end,
         },
       }
+
+      -- Manually setup qmlls since it's not managed by Mason
+      local qmlls_config = servers.qmlls
+      qmlls_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, qmlls_config.capabilities or {})
+      require('lspconfig').qmlls.setup(qmlls_config)
     end,
   },
   {
