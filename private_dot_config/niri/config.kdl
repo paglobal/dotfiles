@@ -167,13 +167,15 @@ animations {
 }
 
 window-rule {
-    geometry-corner-radius 8 
+    geometry-corner-radius 10 
     clip-to-geometry true
+    open-maximized false 
+    open-maximized-to-edges false 
+    open-fullscreen false 
 }
 
 window-rule {
     match app-id="" title="Picture in picture"
-    // opacity 1.0
     open-floating true
     open-focused false
     default-floating-position x=25 y=25 relative-to="bottom-right"
@@ -301,7 +303,6 @@ overview {
     zoom 0.4
 }
 
-// Commented out in `environment.d/90-dms.conf`
 environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
@@ -310,7 +311,7 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
+
 include "./ns-specific.kdl"
 
 include "./noctalia.kdl"
-

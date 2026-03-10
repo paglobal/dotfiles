@@ -1,12 +1,3 @@
-// For NS
-window-rule {
-  // Rounded corners for a modern look.
-  geometry-corner-radius 20
-
-  // Clips window contents to the rounded corner boundaries.
-  clip-to-geometry true
-}
-
 // For NS 
 binds {
     XF86AudioRaiseVolume        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
@@ -34,6 +25,7 @@ binds {
     Mod+D           hotkey-overlay-title="Toggle calendar: ns"               { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Shift+D     hotkey-overlay-title="Toggle dock: ns"                   { spawn-sh "qs -c noctalia-shell ipc call dock toggle"; }
     Mod+V           hotkey-overlay-title="Toggle clipboard: ns"              { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+    Mod+Shift+C     hotkey-overlay-title="Toggle control center: ns"         { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
 }
 
 // For NS 
