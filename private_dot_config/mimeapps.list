@@ -1,0 +1,15 @@
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+image/jpeg=org.gnome.Loupe.desktop
+text/plain=code.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/terminal=kitty.desktop
+application/x-terminal-emulator=kitty.desktop
+
+[Added Associations]
+image/jpeg=org.gnome.Loupe.desktop;
+text/plain=code.desktop;
