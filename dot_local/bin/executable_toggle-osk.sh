@@ -1,9 +1,11 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
-APP="wvkbd-mobintl"
+app="wvkbd-mobintl"
 
-if pgrep -x "$APP" > /dev/null; then
-    pkill -x "$APP"
+if pgrep -x "$app" > /dev/null; then
+    pkill -x "$app"
 else
-    nohup $APP -L 250 --text "ffffff" > /dev/null 2>&1 &
+    nohup $app -L 250 --text "ffffff" > /dev/null 2>&1 &
 fi

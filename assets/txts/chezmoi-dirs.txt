@@ -1,5 +1,4 @@
 ~/assets
-~/scripts
 ~/.config/alacritty
 ~/.config/btop
 ~/.config/cava

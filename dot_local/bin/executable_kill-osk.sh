@@ -1,3 +1,7 @@
-APP="wvkbd-mobintl"
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
-pkill -x "$APP"
+app="wvkbd-mobintl"
+
+pkill -x "$app"

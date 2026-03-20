@@ -2,12 +2,12 @@
   "commands": [
     {
       "name": "Project Launcher",
-      "command": "launch-project.sh || notify-send hi",
+      "command": "tmp-provider.sh launch-project.sh",
       "icon": "folders"
     },
     {
       "name": "Niri Color Picker",
-      "command": "~/scripts/niri-pick-color.sh",
+      "command": "tmp-provider.sh niri-pick-color.sh",
       "icon": "color-picker"
     }
   ]
