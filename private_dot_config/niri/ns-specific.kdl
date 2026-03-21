@@ -34,8 +34,6 @@ binds {
 switch-events {
     tablet-mode-on  { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar showBar && qs -c noctalia-shell ipc call dock toggle"; }
     tablet-mode-off { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar hideBar && qs -c noctalia-shell ipc call dock toggle && ~/scripts/kill-osk.sh"; }
-    lid-close       { spawn "bash" "-c" "qs -c noctalia-shell ipc call lockScreen lock"; }
-
 }
 
 // For NS

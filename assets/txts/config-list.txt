@@ -17,3 +17,4 @@
 ~/.gemini/GEMINI.md
 ~/.gemini/settings.json
 ~/.local/bin
+~/.config/systemd

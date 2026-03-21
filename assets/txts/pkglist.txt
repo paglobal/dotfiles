@@ -79,6 +79,7 @@ scrcpy
 smartmontools
 sof-firmware
 sudo
+swayidle
 ttf-jetbrains-mono-nerd
 ttf-poppins
 ttf-ubuntu-font-family
