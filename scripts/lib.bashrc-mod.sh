@@ -23,7 +23,7 @@ alias pn=pnpm
 alias python="python3"
 
 # prompt config
-source ~/assets/scripts/git-prompt.sh
+source lib.git-prompt.sh
 PS1='\[\e[1;34m\]\u@\h\[\e[0m\] \w$(__git_ps1 " \[\e[1;32m\]%s\[\e[0m\]"): \$ '
 
 # remove packages with yay (stolen from reddit)

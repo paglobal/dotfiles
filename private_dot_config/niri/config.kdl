@@ -172,6 +172,7 @@ window-rule {
     open-maximized false 
     open-maximized-to-edges false 
     open-fullscreen false 
+    default-column-display "tabbed"
 }
 
 window-rule {
@@ -289,9 +290,9 @@ binds {
     Mod+Shift+Print { screenshot-window; }
 
 
-    Mod+P           hotkey-overlay-title="Open color picker"                { spawn-sh "~/scripts/niri-pick-hex-color.sh"; }
+    Mod+P           hotkey-overlay-title="Open color picker"                { spawn-sh "tmp-provider.sh niri-pick-color.sh"; }
     Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
-    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "term.sh yazi || notify-send hi"; }
+    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "term.sh yazi"; }
     Mod+Return      hotkey-overlay-title="Open a terminal: kitty"           { spawn-sh "kitty"; }
     Mod+C           hotkey-overlay-title="Open code editor: vscode"         { spawn-sh "code"; }
     Mod+E           hotkey-overlay-title="Open file manager: nautilus"      { spawn-sh "nautilus"; }

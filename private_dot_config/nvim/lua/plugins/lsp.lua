@@ -124,6 +124,7 @@ return {
         emmet_language_server = {},
         vtsls = {},
         html = {},
+        bashls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

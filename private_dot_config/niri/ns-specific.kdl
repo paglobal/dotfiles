@@ -30,10 +30,11 @@ binds {
 }
 
 // For NS 
-// TODO: change to dock show and hide once implemented
 switch-events {
-    tablet-mode-on  { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar showBar && qs -c noctalia-shell ipc call dock toggle"; }
-    tablet-mode-off { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar hideBar && qs -c noctalia-shell ipc call dock toggle && ~/scripts/kill-osk.sh"; }
+    // TODO: change to dock show and hide once implemented
+    // tablet-mode-on  { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar showBar && qs -c noctalia-shell ipc call dock toggle"; }
+    // tablet-mode-off { spawn "bash" "-c" "qs -c noctalia-shell ipc call bar hideBar && qs -c noctalia-shell ipc call dock toggle && ~/scripts/kill-osk.sh"; }
+    lid-close       { spawn "bash" "-c" "qs -c noctalia-shell ipc call lockScreen lock && systemctl suspend"; }
 }
 
 // For NS
@@ -47,6 +48,12 @@ debug {
 layer-rule {
   match namespace="^noctalia-overview*"
   place-within-backdrop true
+}
+
+// For NS
+window-rule {
+    match app-id="dev.noctalia.noctalia-qs"
+    open-maximized-to-edges true
 }
 
 // For NS

@@ -2,13 +2,18 @@
   "commands": [
     {
       "name": "Project Launcher",
-      "command": "tmp-provider.sh launch-project.sh",
+      "command": "launch-project.sh",
       "icon": "folders"
     },
     {
       "name": "Niri Color Picker",
-      "command": "tmp-provider.sh niri-pick-color.sh",
+      "command": "niri-pick-color.sh",
       "icon": "color-picker"
+    },
+    {
+      "name": "Restart Noctalia",
+      "command": "restart-noctalia.sh",
+      "icon": "restore"
     }
   ]
 }

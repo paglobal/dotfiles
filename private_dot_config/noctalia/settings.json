@@ -235,8 +235,8 @@
         "generationMethod": "monochrome",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "monitorForColors": "",
-        "predefinedScheme": "Kanagawa",
+        "monitorForColors": "eDP-1",
+        "predefinedScheme": "Catppuccin",
         "schedulingMode": "off",
         "useWallpaperColors": true
     },
@@ -260,11 +260,11 @@
             },
             {
                 "enabled": true,
-                "id": "weather-card"
+                "id": "media-sysmon-card"
             },
             {
                 "enabled": true,
-                "id": "media-sysmon-card"
+                "id": "weather-card"
             }
         ],
         "diskPath": "/",
@@ -666,7 +666,7 @@
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
         "scrollbarAlwaysVisible": true,
-        "settingsPanelMode": "attached",
+        "settingsPanelMode": "window",
         "settingsPanelSideBarCardStyle": false,
         "tooltipsEnabled": true,
         "translucentWidgets": false

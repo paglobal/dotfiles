@@ -1,0 +1,8 @@
+ls
+vi .config/alacritty/alacritty.toml
+chezmoi-sync.sh ~/.config/nushell/
+chezmoi-sync
+exit
+cd Documents/committed/components/
+exit
+exit
