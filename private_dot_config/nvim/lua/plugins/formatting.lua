@@ -37,6 +37,7 @@ return {
       jsonc = { 'prettierd', 'prettier', stop_after_first = true },
       yaml = { 'prettierd', 'prettier', stop_after_first = true },
       python = { 'isort', 'black' },
+      nu = { 'nufmt' },
     },
   },
 }

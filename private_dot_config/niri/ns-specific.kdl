@@ -14,7 +14,6 @@ binds {
     Mod+Shift+P     hotkey-overlay-title="Toggle battery manager: ns"        { spawn-sh "qs -c noctalia-shell ipc call battery togglePanel"; }
     Mod+W           hotkey-overlay-title="Toggle network panel: ns"          { spawn-sh "qs -c noctalia-shell ipc call network togglePanel"; }
     Mod+Shift+B     hotkey-overlay-title="Toggle bluetooth panel: ns"        { spawn-sh "qs -c noctalia-shell ipc call bluetooth togglePanel"; }
-    Mod+Shift+T     hotkey-overlay-title="Toggle timer utilities: ns"        { spawn-sh "qs -c noctalia-shell ipc call plugin:timer toggle"; }
     Mod+Shift+Q     hotkey-overlay-title="Toggle session menu: ns"           { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Space       hotkey-overlay-title="Toggle launcher: ns"               { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+Shift+Space hotkey-overlay-title="Toggle command runner: ns"         { spawn-sh "qs -c noctalia-shell ipc call plugin:custom-commands toggle"; }
@@ -26,7 +25,7 @@ binds {
     Mod+D           hotkey-overlay-title="Toggle calendar: ns"               { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Shift+D     hotkey-overlay-title="Toggle dock: ns"                   { spawn-sh "qs -c noctalia-shell ipc call dock toggle"; }
     Mod+V           hotkey-overlay-title="Toggle clipboard: ns"              { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
-    Mod+Shift+C     hotkey-overlay-title="Toggle control center: ns"         { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+C           hotkey-overlay-title="Toggle control center: ns"         { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
 }
 
 // For NS 
@@ -54,6 +53,14 @@ layer-rule {
 window-rule {
     match app-id="dev.noctalia.noctalia-qs"
     open-maximized-to-edges true
+}
+
+// For NS
+// For better contrast between the active and inactive colors of the tab indicator
+layout {
+    tab-indicator {
+        inactive-color "#666666"
+    }
 }
 
 // For NS

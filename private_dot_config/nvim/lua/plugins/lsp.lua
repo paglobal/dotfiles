@@ -125,6 +125,8 @@ return {
         vtsls = {},
         html = {},
         bashls = {},
+        nushell = {},
+        tombi = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -144,7 +146,7 @@ return {
 
       -- Filter out unwanted servers
       ensure_installed = vim.tbl_filter(function(key)
-        return not vim.tbl_contains({ 'qmlls' }, key)
+        return not vim.tbl_contains({ 'qmlls', 'nushell' }, key)
       end, ensure_installed)
 
       vim.list_extend(ensure_installed, {
@@ -169,6 +171,11 @@ return {
       local qmlls_config = servers.qmlls
       qmlls_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, qmlls_config.capabilities or {})
       require('lspconfig').qmlls.setup(qmlls_config)
+
+      -- Manually setup nushell since it's not managed by Mason
+      local nushell_config = servers.nushell
+      nushell_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, nushell_config.capabilities or {})
+      require('lspconfig').nushell.setup(nushell_config)
     end,
   },
   {

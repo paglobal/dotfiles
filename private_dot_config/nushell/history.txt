@@ -6,3 +6,18 @@ exit
 cd Documents/committed/components/
 exit
 exit
+open Downloads/topics.csv | table
+exit
+0.2 * 60
+> keybindings listen
+exit
+is-terminal
+is-terminal --stdout
+exit
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Parse the raw string into a Nu record<\n>        let event = ($line | from json)<\n>        <\n>        # Niri events are typically records where the key is the event name<\n>        # We get the first key name to find the event type (e.g., "WorkspaceActivated")<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"Event received: ($event_name)"<\n>    }
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Generate a timestamp (e.g., 2026-03-26 20:55:01)<\n>        let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")<\n>        <\n>        # Parse the JSON event<\n>        let event = ($line | from json)<\n>        <\n>        # Extract the event name from the record keys<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"[($timestamp)] Event received: ($event_name)"<\n>    }
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Generate a timestamp (e.g., 2026-03-26 20:55:01)<\n>        let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")<\n>        <\n>        # Parse the JSON event<\n>        let event = ($line | from json)<\n>        <\n>        # Extract the event name from the record keys<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"[($timestamp)] Event received: ($event)"<\n>    }
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Generate a timestamp (e.g., 2026-03-26 20:55:01)<\n>        let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")<\n>        <\n>        # Parse the JSON event<\n>        let event = ($line | from json)<\n>        <\n>        # Extract the event name from the record keys<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"[($timestamp)] Event received: ($event_name)"<\n>    }
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Generate a timestamp (e.g., 2026-03-26 20:55:01)<\n>        let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")<\n>        <\n>        # Parse the JSON event<\n>        let event = ($line | from json)<\n>        <\n>        # Extract the event name from the record keys<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"[($timestamp)] Event received: ($event)"<\n>    }
+niri msg --json event-stream <\n>    | lines <\n>    | each { |line|<\n>        # Generate a timestamp (e.g., 2026-03-26 20:55:01)<\n>        let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")<\n>        <\n>        # Parse the JSON event<\n>        let event = ($line | from json)<\n>        <\n>        # Extract the event name from the record keys<\n>        let event_name = ($event | columns | first)<\n>        <\n>        print $"[($timestamp)] Event received: ($event_name)"<\n>    }
+exit

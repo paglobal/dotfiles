@@ -2,18 +2,23 @@
   "commands": [
     {
       "name": "Project Launcher",
-      "command": "launch-project.sh",
+      "command": "run.launch-project.sh",
       "icon": "folders"
     },
     {
       "name": "Niri Color Picker",
-      "command": "niri-pick-color.sh",
+      "command": "run.niri-pick-color.sh",
       "icon": "color-picker"
     },
     {
       "name": "Restart Noctalia",
-      "command": "restart-noctalia.sh",
+      "command": "run.restart-noctalia.sh",
       "icon": "restore"
+    },
+    {
+      "name": "Fast Fetch",
+      "command": "run.hold-term.sh fastfetch",
+      "icon": "terminal-2"
     }
   ]
 }

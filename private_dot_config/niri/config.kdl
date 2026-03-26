@@ -1,103 +1,30 @@
 input {
-    keyboard {
-        xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-
-            // For example:
-            // layout "us,ru"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-        }
-
-        // Enable numlock on startup, omitting this setting disables it.
-        numlock
-    }
-
-    // Next sections include libinput settings.
-    // Omitting settings disables them, or leaves them at their default values.
     touchpad {
-        // off
         tap
         dwt
-        // dwtp
-        // drag false
-        // drag-lock
         natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
     }
 
     mouse {
-        // off
-        // natural-scroll
         accel-speed -0.8
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
     }
 
-    trackpoint {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "on-button-down"
-        // scroll-button 273
-        // middle-emulation
-    }
-
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
 }
 
-// You can configure outputs by their name, which you can find
-// by running `niri msg outputs` while inside a niri instance.
-// The built-in laptop monitor is usually called "eDP-1".
 /-output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Resolution and, optionally, refresh rate of the output.
-    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-    // If the refresh rate is omitted, niri will pick the highest refresh rate
-    // for the resolution.
-    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
     mode "1920x1080@120.030"
-
-    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 2
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
     transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
     position x=1280 y=0
 }
 
+output "PNP(WSX) SGD SX8 0x00000321" {
+    scale 2
+}
+
 layout {
-    // Set gaps around windows in logical pixels.
     gaps 10
-    // When to center a column when changing focus, options are:
-    // - "never", default behavior, focusing an off-screen column will keep at the left
-    //   or right edge of the screen.
-    // - "always", the focused column will always be centered.
-    // - "on-overflow", focusing a column will center it if it doesn't fit
-    //   together with the previously focused column.
     center-focused-column "on-overflow"
     always-center-single-column
     background-color "transparent"
@@ -107,9 +34,6 @@ layout {
         proportion 0.5
         proportion 0.75
         proportion 1.0
-
-        // Fixed sets the width in logical pixels exactly.
-        // fixed 1920
     }
 
     preset-window-heights { 
@@ -119,7 +43,6 @@ layout {
         proportion 1.0
     }
 
-    // default-column-width { proportion 0.5; }
     default-column-width {}
 
     focus-ring {
@@ -129,15 +52,6 @@ layout {
         urgent-color "#9b0000"
     }
 
-    // You can also add a border. It's similar to the focus ring, but always visible.
-    /-border {
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
-    }
-
-    // You can enable drop shadows for windows.
     shadow {
         on
         softness 30
@@ -145,32 +59,21 @@ layout {
         offset x=5 y=5
         color "#0007"
     }
-
-    /-struts {
-        left 64
-        right 64
-        top 64
-        bottom 64
-    }
 }
 
 prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
-
 animations {
-    // off
     slowdown 0.5 
 }
 
 window-rule {
     geometry-corner-radius 10 
     clip-to-geometry true
-    open-maximized false 
-    open-maximized-to-edges false 
+    open-maximized true 
+    open-maximized-to-edges false
     open-fullscreen false 
     default-column-display "tabbed"
 }
@@ -179,6 +82,14 @@ window-rule {
     match app-id="" title="Picture in picture"
     open-floating true
     open-focused false
+    default-floating-position x=25 y=25 relative-to="bottom-right"
+    default-window-height { proportion 0.3; }
+    default-column-width  { proportion 0.25; }
+}
+
+window-rule {
+    match app-id="float-term"
+    open-floating true
     default-floating-position x=25 y=25 relative-to="bottom-right"
     default-window-height { proportion 0.3; }
     default-column-width  { proportion 0.25; }
@@ -197,15 +108,17 @@ binds {
     Mod+Q  { close-window; }
     Alt+F4 { close-window; }
 
-    Mod+H { focus-column-left; }
+    Mod+H { focus-column-or-monitor-left; }
     Mod+J { focus-window-or-workspace-down; }
     Mod+K { focus-window-or-workspace-up; }
-    Mod+L { focus-column-right; }
+    Mod+L { focus-column-or-monitor-right; }
 
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+J { move-window-down-or-to-workspace-down; }
-    Mod+Shift+K { move-window-up-or-to-workspace-up; }
-    Mod+Shift+L { move-column-right; }
+    Mod+Shift+H { move-column-left-or-to-monitor-left; }
+    // Mod+Shift+J { move-window-down-or-to-workspace-down; }
+    // Mod+Shift+K { move-window-up-or-to-workspace-up; }
+    Mod+Shift+J { move-column-to-workspace-down; }
+    Mod+Shift+K { move-column-to-workspace-up; }
+    Mod+Shift+L { move-column-right-or-to-monitor-right; }
 
     Mod+Left  { focus-monitor-left; }
     Mod+Down  { focus-monitor-down; }
@@ -256,7 +169,7 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     Mod+Z       { switch-preset-column-width; }
-    Mod+X       { switch-preset-window-height; }
+    Mod+Shift+Z { switch-preset-window-height; }
     Mod+F       { toggle-windowed-fullscreen; }
     Mod+Shift+F { fullscreen-window; }
     Mod+M       { maximize-window-to-edges; }
@@ -271,16 +184,6 @@ binds {
     Alt+Shift+Space { toggle-window-floating; }
     Alt+Space       { switch-focus-between-floating-and-tiling; }
 
-    Mod+T { toggle-column-tabbed-display; }
-
-    // Applications such as remote-desktop clients and software KVM switches may
-    // request that niri stops processing the keyboard shortcuts defined here
-    // so they may, for example, forward the key presses as-is to a remote machine.
-    // It's a good idea to bind an escape hatch to toggle the inhibitor,
-    // so a buggy application can't hold your session hostage.
-    //
-    // The allow-inhibiting=false property can be applied to other binds as well,
-    // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     Ctrl+Alt+Delete { quit; }
@@ -289,12 +192,11 @@ binds {
     Shift+Print     { screenshot-screen; }
     Mod+Shift+Print { screenshot-window; }
 
-
-    Mod+P           hotkey-overlay-title="Open color picker"                { spawn-sh "tmp-provider.sh niri-pick-color.sh"; }
+    Mod+T           hotkey-overlay-title="Toggle timer"                     { spawn-sh "run.timer.nu"; }
+    Mod+P           hotkey-overlay-title="Open color picker"                { spawn-sh "run.niri-pick-color.sh"; }
     Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
-    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "term.sh yazi"; }
+    Mod+Y           hotkey-overlay-title="Open file manager: yazi"          { spawn-sh "run.term.sh yazi"; }
     Mod+Return      hotkey-overlay-title="Open a terminal: kitty"           { spawn-sh "kitty"; }
-    Mod+C           hotkey-overlay-title="Open code editor: vscode"         { spawn-sh "code"; }
     Mod+E           hotkey-overlay-title="Open file manager: nautilus"      { spawn-sh "nautilus"; }
     Mod+Period      hotkey-overlay-title="Open emoji picker: emote"         { spawn-sh "emote"; }
 }
@@ -316,6 +218,5 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
-include "./ns-specific.kdl"
-
 include "./noctalia.kdl"
+include "./ns-specific.kdl"
