@@ -8,8 +8,6 @@ input {
     mouse {
         accel-speed -0.8
     }
-
-    warp-mouse-to-focus
 }
 
 /-output "eDP-1" {
@@ -27,6 +25,7 @@ layout {
     gaps 10
     center-focused-column "on-overflow"
     always-center-single-column
+    empty-workspace-above-first
     background-color "transparent"
 
     preset-column-widths {
@@ -59,6 +58,11 @@ layout {
         offset x=5 y=5
         color "#0007"
     }
+
+    tab-indicator {
+        inactive-color "#666666"
+        gaps-between-tabs 4
+    }
 }
 
 prefer-no-csd
@@ -87,14 +91,6 @@ window-rule {
     default-column-width  { proportion 0.25; }
 }
 
-window-rule {
-    match app-id="float-term"
-    open-floating true
-    default-floating-position x=25 y=25 relative-to="bottom-right"
-    default-window-height { proportion 0.3; }
-    default-column-width  { proportion 0.25; }
-}
-
 cursor {
     xcursor-theme "breeze_cursors"
     xcursor-size 24 
@@ -114,8 +110,6 @@ binds {
     Mod+L { focus-column-or-monitor-right; }
 
     Mod+Shift+H { move-column-left-or-to-monitor-left; }
-    // Mod+Shift+J { move-window-down-or-to-workspace-down; }
-    // Mod+Shift+K { move-window-up-or-to-workspace-up; }
     Mod+Shift+J { move-column-to-workspace-down; }
     Mod+Shift+K { move-column-to-workspace-up; }
     Mod+Shift+L { move-column-right-or-to-monitor-right; }

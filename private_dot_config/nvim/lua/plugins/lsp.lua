@@ -124,7 +124,10 @@ return {
         emmet_language_server = {},
         vtsls = {},
         html = {},
+        cssls = {},
         bashls = {},
+        tailwindcss = {},
+        svelte = {},
         nushell = {},
         tombi = {},
         lua_ls = {

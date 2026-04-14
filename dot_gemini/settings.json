@@ -20,5 +20,20 @@
   },
   "ui": {
     "showStatusInTitle": true
+  },
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "instruction-reinforcer",
+            "type": "command",
+            "command": "~/.gemini/hooks/reinforce-instructions/reinforce-instructions.nu",
+            "description": "Reinforces instructions present in the global user GEMINI.md file"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -8,10 +8,10 @@ SELECTED_DIR_T=$(mk_t)
 export SELECTED_DIR_T
 
 PICK_PROJECT_DIR() {
-  fd . ~/Documents/committed/ ~/Documents/uncommitted/ \
-    --max-depth 1 \
-    --type d \
-    --absolute-path | fzf >"$SELECTED_DIR_T"
+  {
+    realpath ~/.scripts
+    fd . ~/Documents/committed/ ~/Documents/uncommitted/ --max-depth 1 --type d --absolute-path
+  } | fzf >"$SELECTED_DIR_T"
 }
 export -f PICK_PROJECT_DIR
 

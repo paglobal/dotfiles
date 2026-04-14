@@ -51,7 +51,7 @@
         "displayMode": "always_visible",
         "enableExclusionZoneInset": true,
         "fontScale": 1,
-        "frameRadius": 12,
+        "frameRadius": 16,
         "frameThickness": 8,
         "hideOnOverview": false,
         "marginHorizontal": 4,
@@ -137,6 +137,7 @@
                     "maxWidth": 145,
                     "scrollingMode": "hover",
                     "showIcon": true,
+                    "showText": true,
                     "textColor": "none",
                     "useFixedWidth": false
                 }
@@ -239,6 +240,7 @@
         "monitorForColors": "eDP-1",
         "predefinedScheme": "Catppuccin",
         "schedulingMode": "off",
+        "syncGsettings": true,
         "useWallpaperColors": true
     },
     "controlCenter": {
@@ -364,13 +366,13 @@
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
         "allowPasswordWithFprintd": false,
-        "animationDisabled": true,
-        "animationSpeed": 1,
+        "animationDisabled": false,
+        "animationSpeed": 2,
         "autoStartAuth": false,
         "avatarImage": "/home/paglobal/.assets/images/me-half-dp.png",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
-        "clockStyle": "custom",
+        "clockStyle": "digital",
         "compactLockScreen": true,
         "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
@@ -423,6 +425,7 @@
         "showHibernateOnLockScreen": false,
         "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": false,
+        "smoothScrollEnabled": true,
         "telemetryEnabled": true
     },
     "hooks": {
@@ -449,10 +452,11 @@
         "screenOffCommand": "",
         "screenOffTimeout": 600,
         "suspendCommand": "",
-        "suspendTimeout": 602
+        "suspendTimeout": 1800
     },
     "location": {
         "analogClockInCalendar": false,
+        "autoLocate": false,
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
@@ -463,10 +467,10 @@
         "use12hourFormat": false,
         "useFahrenheit": false,
         "weatherEnabled": true,
-        "weatherShowEffects": true
+        "weatherShowEffects": true,
+        "weatherTaliaMascotAlways": false
     },
     "network": {
-        "airplaneModeEnabled": false,
         "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
@@ -609,25 +613,25 @@
     },
     "settingsVersion": 59,
     "systemMonitor": {
-        "batteryCriticalThreshold": 5,
-        "batteryWarningThreshold": 20,
-        "cpuCriticalThreshold": 90,
-        "cpuWarningThreshold": 80,
+        "batteryCriticalThreshold": 30,
+        "batteryWarningThreshold": 50,
+        "cpuCriticalThreshold": 80,
+        "cpuWarningThreshold": 60,
         "criticalColor": "",
-        "diskAvailCriticalThreshold": 10,
-        "diskAvailWarningThreshold": 20,
-        "diskCriticalThreshold": 90,
-        "diskWarningThreshold": 80,
+        "diskAvailCriticalThreshold": 20,
+        "diskAvailWarningThreshold": 50,
+        "diskCriticalThreshold": 80,
+        "diskWarningThreshold": 60,
         "enableDgpuMonitoring": false,
         "externalMonitor": "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor",
         "gpuCriticalThreshold": 90,
         "gpuWarningThreshold": 80,
-        "memCriticalThreshold": 90,
-        "memWarningThreshold": 80,
-        "swapCriticalThreshold": 90,
-        "swapWarningThreshold": 80,
-        "tempCriticalThreshold": 90,
-        "tempWarningThreshold": 80,
+        "memCriticalThreshold": 80,
+        "memWarningThreshold": 60,
+        "swapCriticalThreshold": 80,
+        "swapWarningThreshold": 60,
+        "tempCriticalThreshold": 80,
+        "tempWarningThreshold": 60,
         "useCustomColors": false,
         "warningColor": ""
     },
@@ -676,7 +680,13 @@
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
+        "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
+            {
+                "directory": "/home/paglobal/.assets/images/wallpapers",
+                "name": "eDP-1",
+                "wallpaper": ""
+            }
         ],
         "overviewBlur": 0.5,
         "overviewEnabled": true,
@@ -706,7 +716,7 @@
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
-        "wallhavenQuery": "",
+        "wallhavenQuery": "abstract dark",
         "wallhavenRatios": "",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",

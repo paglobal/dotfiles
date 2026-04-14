@@ -55,6 +55,7 @@ nano
 neovim
 network-manager-applet
 networkmanager
+ninja
 niri
 noctalia-shell
 noto-fonts

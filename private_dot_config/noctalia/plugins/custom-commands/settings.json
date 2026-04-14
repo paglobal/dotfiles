@@ -17,7 +17,7 @@
     },
     {
       "name": "Fast Fetch",
-      "command": "run.hold-term.sh fastfetch",
+      "command": "run.term.hold.sh fastfetch",
       "icon": "terminal-2"
     }
   ]

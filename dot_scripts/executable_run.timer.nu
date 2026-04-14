@@ -36,7 +36,7 @@ def main [] {
             body: $"Tracked ($duration_in_minutes) mins"
         } | to json --raw
         qs -c noctalia-shell ipc call toast send $toast_payload
-        for i in 1..4 { ffplay -nodisp -autoexit /usr/share/sounds/freedesktop/stereo/complete.oga out> /dev/null err> /dev/null }
+        for i in 1..3 { ffplay -nodisp -autoexit /usr/share/sounds/freedesktop/stereo/complete.oga out> /dev/null err> /dev/null }
         let description = (gum write --placeholder "What happened?")
         let new_timer_history_entry = {
             description: $description

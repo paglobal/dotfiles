@@ -15,6 +15,8 @@
 ~/.config/mimeapps.list
 ~/.gemini/GEMINI.md
 ~/.gemini/settings.json
+~/.gemini/skills
+~/.gemini/hooks
 ~/.config/systemd
 ~/.config/nushell
 ~/.scripts
