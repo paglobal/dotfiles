@@ -2,7 +2,7 @@
   "tool-use-prompter": {
     "PreToolUse": [
       {
-        "matcher": "*",
+        "matcher": "write_to_file|replace_file_content|multi_replace_file_content|run_command|manage_task",
         "hooks": [
           {
             "type": "command",

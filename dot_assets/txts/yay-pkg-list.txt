@@ -2,6 +2,7 @@
 adw-gtk-theme
 alacritty
 android-tools
+antigravity
 audacity
 base
 base-devel

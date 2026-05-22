@@ -9,6 +9,7 @@ text/plain=code.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/terminal=kitty.desktop
 application/x-terminal-emulator=kitty.desktop
+x-scheme-handler/antigravity=antigravity.desktop
 
 [Added Associations]
 image/jpeg=org.gnome.Loupe.desktop;
