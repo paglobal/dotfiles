@@ -1,0 +1,23 @@
+{
+  "tool-use-prompter": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hook-scripts/prompt-tool-use.nu"
+          }
+        ]
+      }
+    ]
+  },
+  "instruction-reinforcer": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "./hook-scripts/reinforce-instructions.nu"
+      }
+    ]
+  }
+}
