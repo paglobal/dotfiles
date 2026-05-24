@@ -1,12 +1,13 @@
 {
-  "tool-use-prompter": {
+  "tool-use-supervisor": {
     "PreToolUse": [
       {
-        "matcher": "write_to_file|replace_file_content|multi_replace_file_content|run_command|manage_task",
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "./hook-scripts/prompt-tool-use.nu"
+            "command": "./scripts/supervise-tool-use/supervise-tool-use.nu",
+            "timeout": 600
           }
         ]
       }
@@ -16,7 +17,7 @@
     "PreInvocation": [
       {
         "type": "command",
-        "command": "./hook-scripts/reinforce-instructions.nu"
+        "command": "./scripts/reinforce-instructions/reinforce-instructions.nu"
       }
     ]
   }

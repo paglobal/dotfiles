@@ -9,6 +9,8 @@ export SELECTED_DIR_T
 
 PICK_PROJECT_DIR() {
   {
+    realpath ~/.assets
+    realpath ~/.gemini
     realpath ~/.scripts
     fd . ~/Documents/committed/ ~/Documents/uncommitted/ --max-depth 1 --type d --absolute-path
   } | fzf >"$SELECTED_DIR_T"
@@ -21,38 +23,22 @@ selected_dir=$(rd_t "$SELECTED_DIR_T")
 
 [ -z "$selected_dir" ] && exit 0
 
-SELECTED_MODE_T=$(mk_t)
-export SELECTED_MODE_T
+SELECTED_EDITOR_T=$(mk_t)
+export SELECTED_EDITOR_T
 
-export CODE_EDITOR="code-editor"
-export AGENT="agent"
-export BOTH="both"
+export CODE="code"
+export ZEDITOR="zeditor"
+export NVIM="nvim"
 
-PICK_MODE() {
-  printf "%s\n%s\n%s\n" "$BOTH" "$CODE_EDITOR" "$AGENT" | fzf >"$SELECTED_MODE_T"
+PICK_EDITOR() {
+  printf "%s\n%s\n%s\n" "$CODE" "$ZEDITOR" "$NVIM" | fzf >"$SELECTED_EDITOR_T"
 }
-export -f PICK_MODE
+export -f PICK_EDITOR
 
-run.term.sh PICK_MODE
+run.term.sh PICK_EDITOR
 
-selected_mode=$(rd_t "$SELECTED_MODE_T")
+selected_editor=$(rd_t "$SELECTED_EDITOR_T")
 
-editor_command="cd '$selected_dir' && code ."
-agent_command="cd '$selected_dir' && gemini"
+editor_command="cd '$selected_dir' && '$selected_editor' ."
 
-case "$selected_mode" in
-"$CODE_EDITOR")
-  nohup run.term.sh "$editor_command" &
-  ;;
-"$AGENT")
-  nohup run.term.sh "$agent_command" &
-  ;;
-"$BOTH")
-  nohup run.term.sh "$editor_command" &
-  nohup run.term.sh "$agent_command" &
-  ;;
-*)
-  echo "Unexpected selection"
-  exit 1
-  ;;
-esac
+nohup run.term.sh "$editor_command" &

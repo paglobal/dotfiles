@@ -13,8 +13,8 @@ alias se="sudoedit"
 # neovim alias
 alias vi="nvim"
 
-# change default editor from nano to vim
-export EDITOR="nvim"
+# change default editor from nano to zed
+export EDITOR="zeditor"
 
 # pnpm alias
 alias pn=pnpm

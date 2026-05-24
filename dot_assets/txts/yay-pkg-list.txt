@@ -110,5 +110,6 @@ xorg-xwayland
 yay
 yay-debug
 yazi
+zed
 zoxide
 zram-generator

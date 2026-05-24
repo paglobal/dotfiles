@@ -32,3 +32,81 @@ exit
 4.5 | describe
 4 | describe
 exit
+"line1\nline2\n" | split row "\n"
+"line1\nline2\n" | split row "\n" | str join "\n"
+"line1\nline2\n" | split row "\n" | str join "\n" | split row "\n"
+"line1\nline2" | split row "\n" | str join "\n" | split row "\n"
+"line1\nline2\n\n" | split row "\n" | str join "\n" | split row "\n"
+"\n\nline1\nline2\n\n" | split row "\n" | str join "\n" | split row "\n"
+"\n\nline1\nline2\n\n" | split row "\n" | str join "\n"
+"\n\nline1\nline2\n\n" | str trim
+exit
+tutor
+tutor begin
+ls | select name
+tutor tables
+exit
+$val | describe
+val = { a: "" }
+let val = { a: "" }
+$val | describe
+$val.a | describe
+$val.b | describe
+$val.b? | describe
+$val.a? | describe
+let val = { a: "" }
+val.a
+$val.a
+$val.b
+$val.b? | is-empty
+$val.a? | is-empty
+$val.f? | is-empty
+$val.b = "6"
+$val | upsert { b: "6" }
+$val | upsert b "6"
+$val.b? | is-empty
+$val.b | is-empty
+$val
+let cane = $val | upsert b "6"
+$cane.b? | is-empty
+$cane.b
+if ($cane.b? | is-empty) {<\n>ls}
+if ($cane.b? | is-empty) {<\n>ls ~ }
+if ($cane.b? | is-empty) {<\n>ls ~<\n>}
+if ($cane.g? | is-empty) {<\n>ls ~<\n>}
+if $cane.g? | is-empty {<\n>ls ~<\n>}
+let can = { "a": "b" }
+$can.a
+$can.b
+$can.b?
+let can = { "a": "b" }
+let b = can?.x
+let b = can.x?
+let b = $can.x?
+$b.a?
+$b
+$b | is-empty
+$b.b
+$b.b?
+exit
+exit
+exit
+let can = { "a": "b" }
+let can = { "a": "b", "c": nothing }
+let can = { "a": "b", "c": null }
+$can | to-json
+$can | to json
+let can = { "a": "b", "c": nothing }
+$can | to json
+def deny [reason?: string] {<\n>    print ({ decision: "deny", reason: $reason } | to json)<\n>}<\n>
+deny 
+null | is-empty
+nothing | is-empty
+exit
+let can = [{ "a": "b", "c": nothing }]
+$can | describe
+let can = [{ "a": "b", "c": nothing}, { "d": "4", "x": nothing }]
+$can | describe
+let can = ["3", "4", "2"]
+$can | describe
+exit
