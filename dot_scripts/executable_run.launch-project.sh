@@ -8,12 +8,12 @@ SELECTED_DIR_T=$(mk_t)
 export SELECTED_DIR_T
 
 PICK_PROJECT_DIR() {
-  {
-    realpath ~/.assets
-    realpath ~/.gemini
-    realpath ~/.scripts
-    fd . ~/Documents/committed/ ~/Documents/uncommitted/ --max-depth 1 --type d --absolute-path
-  } | fzf >"$SELECTED_DIR_T"
+    {
+        realpath ~/.assets
+        realpath ~/.gemini
+        realpath ~/.scripts
+        fd . ~/Documents/committed/ ~/Documents/uncommitted/ --max-depth 1 --type d --absolute-path
+    } | fzf >"$SELECTED_DIR_T"
 }
 export -f PICK_PROJECT_DIR
 
@@ -26,12 +26,12 @@ selected_dir=$(rd_t "$SELECTED_DIR_T")
 SELECTED_EDITOR_T=$(mk_t)
 export SELECTED_EDITOR_T
 
-export CODE="code"
 export ZEDITOR="zeditor"
+export CODE="code"
 export NVIM="nvim"
 
 PICK_EDITOR() {
-  printf "%s\n%s\n%s\n" "$CODE" "$ZEDITOR" "$NVIM" | fzf >"$SELECTED_EDITOR_T"
+    printf "%s\n%s\n%s\n" "$ZEDITOR" "$CODE" "$NVIM" | fzf >"$SELECTED_EDITOR_T"
 }
 export -f PICK_EDITOR
 

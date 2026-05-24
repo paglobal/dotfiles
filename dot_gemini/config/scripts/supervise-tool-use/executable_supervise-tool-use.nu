@@ -107,9 +107,9 @@ def execute [] {
     $new_text | save -f $preview_file
     let content_before = open --raw $preview_file
     if $is_new_file {
-        ^zeditor --wait $preview_file
+        ^zeditor --wait --existing --add $preview_file
     } else {
-        ^zeditor --wait --diff $target $preview_file
+        ^zeditor --wait --existing --add --diff $target $preview_file
     }
     let content_after = open --raw $preview_file
     let before_normalized = normalize $content_before

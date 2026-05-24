@@ -7,7 +7,7 @@
           {
             "type": "command",
             "command": "./scripts/supervise-tool-use/supervise-tool-use.nu",
-            "timeout": 600
+            "timeout": 10800
           }
         ]
       }
