@@ -1,0 +1,80 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "showing_completions",
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+    },
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      "space s": "workspace::Save",
+      "ctrl-f": "buffer_search::Deploy",
+      "space c c": "editor::ToggleComments",
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp",
+    },
+  },
+  {
+    "context": "Workspace || Pane || Terminal || Editor",
+    "bindings": {
+      "ctrl-b": "workspace::ToggleRightDock",
+      "ctrl-j": "workspace::ToggleBottomDock",
+      "ctrl-w": "pane::CloseActiveItem",
+    },
+  },
+  // We don't want to activate those keybindings in insert mode or inputs that are not the full editor
+  {
+    "context": "(Workspace || Pane || Terminal || Editor) && !(Editor && vim_mode == insert) && !(Editor && !(mode == full))",
+    "bindings": {
+      "space q": "pane::CloseActiveItem",
+      "] t": "pane::ActivateNextItem",
+      "[ t": "pane::ActivatePreviousItem",
+      "space j": "workspace::ActivatePaneDown",
+      "space k": "workspace::ActivatePaneUp",
+      "space h": "workspace::ActivatePaneLeft",
+      "space l": "workspace::ActivatePaneRight",
+      "space v s": "pane::SplitVertical",
+      "space shift h": "workspace::SwapPaneLeft",
+      "space shift l": "workspace::SwapPaneRight",
+      "space f f": "file_finder::Toggle",
+      "space f w": "pane::DeploySearch",
+      "space t n": "project_panel::ToggleFocus",
+      "space w w": "editor::ToggleSoftWrap",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "d": "project_panel::Trash",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "r": "project_panel::Rename",
+      "o": "project_panel::Open",
+      "p": "project_panel::Paste",
+      // Revisit this and maybe file issue
+      // "u": "project_panel::Undo",
+      // "ctrl-r": "project_panel::Redo",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-d": "vim::ScrollDown",
+    },
+  },
+]

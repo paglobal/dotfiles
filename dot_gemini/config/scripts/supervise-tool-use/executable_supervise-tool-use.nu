@@ -118,7 +118,7 @@ def execute [] {
         allow
     } else {
         $content_after | save -f $target
-        deny "Your edits have been modified. Read file to see new state and how to move on. Pay attention to comments with prefix `agent:`"
+        deny "Your edits have been modified. Read file to see new state and how to proceed."
     }
     rm -f $preview_file
 }

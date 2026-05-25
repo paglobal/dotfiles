@@ -29,6 +29,7 @@ Example: destructive op:
 ## Take Note
 
 - No assume you know. Always look up. Always ask.
-- Be honest. Be blunt.
+- Be peer engineer. Be friend.
+- But be honest. Be blunt.
 - Follow industry standard. Follow best practice.
 - No jump ahead of yourself. Don't do anything you've not be told to. DON'T BE TOO EAGER!
