@@ -4,8 +4,11 @@ def normalize [text: string] {
 }
 
 def apply-chunk [lines: list<string>, chunk: record] {
-    let start = ($chunk.StartLine | into int)
-    let end = ($chunk.EndLine | into int)
+    let start = $chunk.StartLine
+    let end = $chunk.EndLine
+    if ($start | describe) != "int" or ($end | describe) != "int" {
+        error make
+    }
     let before = ($lines | take ($start - 1))
     let target_block = (
         $lines
@@ -14,7 +17,7 @@ def apply-chunk [lines: list<string>, chunk: record] {
         | str join "\n"
     )
     let after = ($lines | skip $end)
-    let replace_all = ($chunk | get AllowMultiple? | default false)
+    let replace_all = ($chunk.AllowMultiple? | default false)
     let new_block = if $replace_all {
         $target_block
         | str replace --all $chunk.TargetContent $chunk.ReplacementContent
@@ -29,21 +32,8 @@ def apply-chunk [lines: list<string>, chunk: record] {
     )
 }
 
-def build-preview-path [parsed] {
-    let preview_name = if ($parsed.extension | is-empty) {
-        $"($parsed.stem).preview"
-    } else {
-        $"($parsed.stem).preview.($parsed.extension)"
-    }
-    $parsed.parent | path join $preview_name
-}
-
 def deny [reason: string] {
     print ({ decision: "deny", reason: $reason } | to json)
-}
-
-def allow [] {
-    print ({ decision: "allow" } | to json)
 }
 
 def ask [] {
@@ -52,10 +42,6 @@ def ask [] {
 
 def force-ask [] {
     print ({ decision: "force_ask" } | to json)
-}
-
-def is-list [val] {
-    ($val | describe | str starts-with "list")
 }
 
 def execute [] {
@@ -68,16 +54,14 @@ def execute [] {
     if ($target | is-empty) {
        if $tool == "run_command" or $tool == "manage_task" {
            force-ask
-       } else if $tool == "read_url_content" {
-           allow
        } else {
            ask
        }
 
        return
     }
-    let parsed: record = ($target | path parse)
-    let preview_file = (build-preview-path $parsed )
+    let abs_target = ($target | path expand)
+    let tmp_file = $"/tmp($abs_target)"
     let is_new_file = not ($target | path exists)
     let orig_text = if $is_new_file { "" } else { open --raw $target }
     let orig_lines = $orig_text | split row "\n"
@@ -103,34 +87,32 @@ def execute [] {
 
         return
     }
-    mkdir $parsed.parent
-    $new_text | save -f $preview_file
-    let content_before = open --raw $preview_file
+    # Create parent directories if they don't exist
+    mkdir ($target | path dirname)
+    mkdir ($tmp_file | path dirname)
+    $orig_text | save -f $tmp_file
+    $new_text | save -f $target
+    let content_before = $new_text
     if $is_new_file {
-        ^zeditor --wait --existing --add $preview_file
+        ^zeditor --wait --existing --add $target
     } else {
-        ^zeditor --wait --existing --add --diff $target $preview_file
+        ^zeditor --wait --existing --add --diff $tmp_file $target
     }
-    let content_after = open --raw $preview_file
+    let content_after = open --raw $target
     let before_normalized = normalize $content_before
     let after_normalized = normalize $content_after
     if $before_normalized == $after_normalized {
-        allow
+        deny "Your edits have been applied as is. Great job!"
     } else {
-        $content_after | save -f $target
         deny "Your edits have been modified. Read file to see new state and how to proceed."
     }
-    rm -f $preview_file
-}
-
-def handle-fail [err] {
-    force-ask
+    rm -f $tmp_file
 }
 
 def main [] {
     try {
         $in | execute
-    } catch {|err|
-        handle-fail $err
+    } catch {
+        force-ask
     }
 }

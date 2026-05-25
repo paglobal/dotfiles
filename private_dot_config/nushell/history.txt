@@ -110,3 +110,11 @@ $can | describe
 let can = ["3", "4", "2"]
 $can | describe
 exit
+"/tmp" | path join "/home/foo"
+let can = { "a": "b", "c": 5 }
+($can.a | describe) != "int"
+($can.c | describe) != "int"
+error m
+error make
+exit
+exit
