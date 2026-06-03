@@ -1,10 +1,10 @@
 # yazi function
 function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  yazi "$@" --cwd-file="$tmp"
-  IFS= read -r -d '' cwd <"$tmp"
-  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-  rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd <"$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
 }
 
 # sudeedit alias
@@ -13,8 +13,14 @@ alias se="sudoedit"
 # neovim alias
 alias vi="nvim"
 
-# change default editor from nano to zed
-export EDITOR="zeditor"
+# zed alias
+alias zed="zeditor"
+
+# antigravity alias
+alias ag="antigravity"
+
+# change default editor from nano to nvim
+export EDITOR="nvim"
 
 # pnpm alias
 alias pn=pnpm

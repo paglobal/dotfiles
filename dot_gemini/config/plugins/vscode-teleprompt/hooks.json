@@ -1,0 +1,30 @@
+{
+  "pre-tool-use-supervisor": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/supervise-tool-use/supervise-tool-use.nu pre",
+            "timeout": 10800
+          }
+        ]
+      }
+    ]
+  },
+  "post-tool-use-supervisor": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/supervise-tool-use/supervise-tool-use.nu post",
+            "timeout": 10800
+          }
+        ]
+      }
+    ]
+  }
+}

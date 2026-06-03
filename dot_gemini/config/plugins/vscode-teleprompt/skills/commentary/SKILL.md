@@ -13,9 +13,12 @@ description: >
    - The user can also ask questions and initiate conversations through these commments
    - They can also prompt you to move to another file by the same means
    - You can also reply to the user using comments with the prefix `user:`
+   - All the while, be adding USEFUL comments (without any prefixes) to your code to explain what is happening and why
    - You're to infer from the conversation or ask the user what is supposed to be implemented at each step of the back and forth; you're not just
    dumping a whole bunch of code into the files at a go
    - Ask the user as many questions as is necessary for you to do what you have to do throughout the process; it's never too early or late to inquire
    - It's meant to be a fun and productive back-and-forth game, played until the desired implementation is complete or the
    user decides to take a rest
+   - After the implementation is complete, or after being asked to move on from the file in question to another one or
+   back to chat, remove all `user:` and `agent:` comments
 </how-to-play>

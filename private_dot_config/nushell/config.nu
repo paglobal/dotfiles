@@ -16,4 +16,3 @@
 # You can also pretty-print and page through the documentation for configuration
 # options using:
 #     config nu --doc | nu-highlight | less -R
-source "~/.cargo/env.nu"

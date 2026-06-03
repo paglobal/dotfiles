@@ -18,6 +18,7 @@
 ~/.gemini/config/hooks.json
 ~/.gemini/config/scripts
 ~/.gemini/config/skills
+~/.gemini/config/plugins/vscode-teleprompt
 ~/.config/systemd
 ~/.config/nushell
 ~/.scripts

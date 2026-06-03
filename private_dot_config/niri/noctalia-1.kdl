@@ -16,7 +16,6 @@ binds {
     Mod+Shift+B     hotkey-overlay-title="Toggle bluetooth panel: ns"        { spawn-sh "qs -c noctalia-shell ipc call bluetooth togglePanel"; }
     Mod+Shift+Q     hotkey-overlay-title="Toggle session menu: ns"           { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Space       hotkey-overlay-title="Toggle launcher: ns"               { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    Mod+Shift+Space hotkey-overlay-title="Toggle command runner: ns"         { spawn-sh "qs -c noctalia-shell ipc call plugin:custom-commands toggle"; }
     Mod+S           hotkey-overlay-title="Toggle settings: ns"               { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
     Mod+Shift+S     hotkey-overlay-title="Toggle bar: ns"                    { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
     Mod+Shift+W     hotkey-overlay-title="Toggle system monitor: ns"         { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }

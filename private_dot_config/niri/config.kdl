@@ -35,7 +35,7 @@ layout {
         proportion 1.0
     }
 
-    preset-window-heights { 
+    preset-window-heights {
         proportion 0.25
         proportion 0.5
         proportion 0.75
@@ -70,15 +70,15 @@ prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
-    slowdown 0.5 
+    slowdown 0.5
 }
 
 window-rule {
-    geometry-corner-radius 10 
+    geometry-corner-radius 10
     clip-to-geometry true
-    open-maximized true 
+    open-maximized true
     open-maximized-to-edges false
-    open-fullscreen false 
+    open-fullscreen false
     default-column-display "tabbed"
 }
 
@@ -93,7 +93,7 @@ window-rule {
 
 cursor {
     xcursor-theme "breeze_cursors"
-    xcursor-size 24 
+    xcursor-size 24
 }
 
 binds {
@@ -186,6 +186,7 @@ binds {
     Shift+Print     { screenshot-screen; }
     Mod+Shift+Print { screenshot-window; }
 
+    Mod+Shift+Space hotkey-overlay-title="Activate project launcher"        { spawn-sh "run.launch-project.sh"; }
     Mod+T           hotkey-overlay-title="Toggle timer"                     { spawn-sh "run.timer.nu"; }
     Mod+P           hotkey-overlay-title="Open color picker"                { spawn-sh "run.niri-pick-color.sh"; }
     Mod+B           hotkey-overlay-title="Open browser: chrome"             { spawn-sh "google-chrome-stable"; }
@@ -213,4 +214,4 @@ environment {
 }
 
 include "./noctalia.kdl"
-include "./ns-specific.kdl"
+include "./noctalia-1.kdl"

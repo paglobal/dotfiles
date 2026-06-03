@@ -34,13 +34,15 @@
       "ctrl-b": "workspace::ToggleRightDock",
       "ctrl-j": "workspace::ToggleBottomDock",
       "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-q": "pane::CloseCleanItems",
     },
   },
   // We don't want to activate those keybindings in insert mode or inputs that are not the full editor
   {
-    "context": "(Workspace || Pane || Terminal || Editor) && !(Editor && vim_mode == insert) && !(Editor && !(mode == full))",
+    "context": "(Workspace || Pane || Editor) && !(Editor && vim_mode == insert) && !(Editor && !(mode == full)) && !Terminal",
     "bindings": {
-      "space q": "pane::CloseActiveItem",
+      // Try getting used to `ctrl-w`. This action is too destructive to be mistakenly used in the terminal
+      // "space q": "pane::CloseActiveItem",
       "] t": "pane::ActivateNextItem",
       "[ t": "pane::ActivatePreviousItem",
       "space j": "workspace::ActivatePaneDown",
@@ -54,6 +56,7 @@
       "space f w": "pane::DeploySearch",
       "space t n": "project_panel::ToggleFocus",
       "space w w": "editor::ToggleSoftWrap",
+      "space space": "pane::TogglePinTab",
     },
   },
   {

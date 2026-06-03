@@ -3,6 +3,7 @@ adw-gtk-theme
 alacritty
 android-tools
 antigravity
+antigravity-cli
 audacity
 base
 base-devel
@@ -63,6 +64,7 @@ noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+ntfs-3g
 nushell
 obs-studio
 obsidian
@@ -86,6 +88,7 @@ shfmt
 smartmontools
 sof-firmware
 sudo
+tree-sitter-cli
 ttf-jetbrains-mono-nerd
 ttf-poppins
 ttf-ubuntu-font-family
