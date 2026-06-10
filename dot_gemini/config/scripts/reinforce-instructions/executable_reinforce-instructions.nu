@@ -1,4 +1,5 @@
 #!/usr/bin/env -S nu --stdin
+
 def main [] {
   let instructions_path = ("~/.gemini/GEMINI.md" | path expand)
   let instructions = if ($instructions_path | path exists) {

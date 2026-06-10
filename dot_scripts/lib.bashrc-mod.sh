@@ -20,7 +20,8 @@ alias zed="zeditor"
 alias ag="antigravity"
 
 # change default editor from nano to nvim
-export EDITOR="nvim"
+export EDITOR="zeditor --wait"
+export VISUAL="zeditor --wait"
 
 # pnpm alias
 alias pn=pnpm
@@ -37,6 +38,3 @@ alias yeet="yay -Rns"
 
 # initialize zoxide
 eval "$(zoxide init bash)"
-
-# noctalia shell ipc alias
-alias nsi="qs -c noctalia-shell ipc call"

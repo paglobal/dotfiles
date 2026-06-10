@@ -69,9 +69,9 @@
       "r": "project_panel::Rename",
       "o": "project_panel::Open",
       "p": "project_panel::Paste",
-      // Revisit this and maybe file issue
-      // "u": "project_panel::Undo",
-      // "ctrl-r": "project_panel::Redo",
+      // TODO: Not working. Revisit this and maybe file issue
+      "u": "project_panel::Undo",
+      "ctrl-r": "project_panel::Redo",
     },
   },
   {

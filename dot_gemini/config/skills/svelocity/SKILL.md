@@ -1,7 +1,7 @@
 ---
 name: svelocity 
 description: >
-  When the user want to go really fast and do a lot more and a lot better in svelte with YOU, either you'll sense it and
+  When the user wants to do anything with svelte, either you'll sense it and
   initiate, or the user will explicitly use "/svelocity". 
 ---
 

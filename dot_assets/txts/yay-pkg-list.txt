@@ -111,7 +111,6 @@ xorg-server
 xorg-xinit
 xorg-xwayland
 yay
-yay-debug
 yazi
 zed
 zoxide

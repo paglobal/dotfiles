@@ -1,5 +1,4 @@
 #!/usr/bin/env nu
-
 module z {
   export def int [] {
     { type: "int" }
@@ -33,16 +32,6 @@ module z {
     { type: "enum", content: $content }
   }
 
-  export def default [value: any] {
-    let schema = $in
-    $schema | merge { default: $value }
-  }
-
-  export def optional [] {
-    let schema = $in
-    $schema | merge { optional: true }
-  }
-
   def "parse-percent-string" [percent_string: string] {
     if ($percent_string | str ends-with "%") {
       let number = ($percent_string | str replace "%" "" | into float)
@@ -55,13 +44,7 @@ module z {
   export def parse [schema: record, data: any, path: string = ""] {
     let type = $schema.type
     if ($data == null) {
-      if ("default" in $schema) {
-        return { value: $schema.default, errors: [] }
-      } else if ($schema.optional? == true) {
-        return { value: null, errors: [] }
-      } else {
-        return { value: null, errors: [{ path: $path, msg: "Missing required field!"}]}
-      }
+      return { value: null, errors: [] }
     }
     match $type {
       "int" => {
@@ -152,17 +135,14 @@ module z {
 use z
 
 def get-config-schema [] {
-  let size = (z union [(z float) (z percent-string)])
-  let window_action = (z enum ["ignore", "show-self", "show-all", "hide-self", "hide-all"])
-  let sidebar_anchor = (z enum ["top-left", "bottom-left", "top-right", "bottom-right"])
-  let default_floating_window_dimension = (z default { number: 1, kind: "percentage"})
-  let default_tiling_window_dimension = (z default { number: 0.33, kind: "percentage"})
-  let default_spacing = (z default { number: 3, kind: "integer"})
+  let size = (z union [(z int) (z float) (z percent-string)])
+  let window_action = (z enum ["ignore", "show_self", "show_all", "hide_self", "hide_all"])
+  let sidebar_anchor = (z enum ["top_left", "bottom_left", "top_right", "bottom_right"])
 
   z record {
-    sidebar: (z record {
+    sidebar: ((z record {
       gap: $size,
-      anchor: $sidebar_anchor
+      anchor: $sidebar_anchor,
       peak: $size,
       margins: (z record {
         top: $size,
@@ -170,75 +150,268 @@ def get-config-schema [] {
         right: $size,
         bottom: $size
       })
-    }),
+    })),
     windows: (z array (z record {
-      match: ((z array (z record {
-        app-id: (z string | z optional),
-        title: (z string | z optional)
-      })) | z optional),
-      exclude: ((z array (z record {
-        app-id: (z string | z optional),
-        title: (z string | z optional)
-      })) | z optional),
+      match: (z array (z record {
+        app_id: (z string),
+        title: (z string),
+      })),
+      exclude: (z array (z record {
+        app_id: (z string),
+        title: (z string)
+      })),
       tiling: (z record {
-        default-width: ($size | z default 5) ,
-        default-height: $size,
+        default_width: ($size),
+        default_height: ($size),
       }),
       floating: (z record {
-        position: (z enum ["start", "end", "auto"]),
-        default-width: $size,
-        default-height: $size,
-        on-focus: (z record {
-          sidebar-hidden: $window_action,
-          sidebar-shown: $window_action,
+        default_width: ($size),
+        default_height: ($size),
+        on_focus: (z record {
+          sidebar_hidden: ($window_action),
+          sidebar_shown: ($window_action),
         }),
-        on-blur: (z record {
-          sidebar-hidden: $window_action,
-          sidebar-shown: $window_action,
+        on_blur: (z record {
+          sidebar_hidden: ($window_action),
+          sidebar_shown: ($window_action),
         }),
-        on-sidebar-focus: (z record {
-          sidebar-hidden: $window_action,
-          sidebar-shown: $window_action,
+        on_sidebar_focus: ((z record {
+          sidebar_hidden: ($window_action),
+          sidebar_shown: ($window_action),
+        })),
+        on_sidebar_blur: (z record {
+          sidebar_hidden: ($window_action),
+          sidebar_shown: ($window_action),
         }),
-        on-sidebar-blur: (z record {
-          sidebar-hidden: $window_action,
-          sidebar-shown: $window_action,
-        }),
-
       })
     }))
-
   }
 }
 
-def main [] {
-    job spawn { run-niri-watcher } -t "niri-watcher"
-    job spawn { run-socket-server } -t "socket-server"
-    job spawn { run-config-watcher } -t "config-watcher"
-    run-manager
+def get-default-config [] {
+  {
+    sidebar: {
+      gap: { number: 5, kind: "integer" },
+      anchor: "bottom_right",
+      peak: { number: 5, kind: "percentage" },
+      margins: {
+        top: { number: 5, kind: "integer" },
+        left: { number: 5, kind: "integer" },
+        right: { number: 5, kind: "integer" },
+        bottom: { number: 5, kind: "integer" }
+      }
+    },
+    windows: [
+      {
+        tiling: {
+          default_width: { number: 33, kind: "percentage" },
+          default_height: { number: 33, kind: "percentage" }
+        },
+        floating: {
+          default_width: { number: 75, kind: "percentage" },
+          default_height: { number: 100, kind: "percentage" }
+        },
+        on_focus: {
+          self_hidden: "show_self",
+          self_shown: "ignore",
+          sidebar_hidden: "ignore",
+          sidebar_shown: "ignore",
+        },
+        on_blur: {
+          self_hidden: "ignore",
+          self_shown: "hide_self",
+          sidebar_hidden: "ignore",
+          sidebar_shown: "ignore",
+        },
+        on_sidebar_focus: {
+          self_hidden: "ignore",
+          self_shown: "ignore",
+          sidebar_hidden: "ignore",
+          sidebar_shown: "ignore",
+        },
+        on_sidebar_blur: {
+          self_hidden: "ignore",
+          self_shown: "ignore",
+          sidebar_hidden: "ignore",
+          sidebar_shown: "ignore",
+        },
+      }
+    ]
+  }
 }
+
+# Recursively merge two values. If both are records, merge keys.
+# If both are lists, merge elements by index if possible, otherwise use b.
+def merge-deep [a: any, b: any] {
+  let type_a = ($a | describe)
+  let type_b = ($b | describe)
+  if ($a == null) {
+    return $b
+  }
+  if ($b == null) {
+    return $a
+  }
+  if ($type_a | str starts-with "record") and ($type_b | str starts-with "record") {
+    mut result = $a
+    for key in ($b | columns) {
+      let val_b = ($b | get $key)
+      if ($key in ($a | columns)) {
+        let val_a = ($a | get $key)
+        $result = ($result | insert $key (merge-deep $val_a $val_b))
+      } else {
+        $result = ($result | insert $key $val_b)
+      }
+    }
+
+    return $result
+  }
+  if (($type_a | str starts-with "list") or ($type_a | str starts-with "table")) and (($type_b | str starts-with "list") or ($type_b | str starts-with "table")) {
+    if ($b | is-empty) {
+      return $a
+    }
+    if ($a | length) > 0 {
+      let template = ($a | first)
+
+      return ($b | each { |item| merge-deep $template $item })
+    }
+
+    return $b
+  }
+  
+  return $b
+}
+
+def load-config [path: string] {
+  let defaults = (get-default-config)
+  if not ($path | path exists) {
+    return $defaults
+  }
+  try {
+    let raw = (open $path)
+    let schema = (get-config-schema)
+    let parsed = (z parse $schema $raw)
+    if not ($parsed.errors | is-empty) {
+      let err_msg = ($parsed.errors | each { |e| $"($e.path): ($e.msg)" } | str join "; ")
+      try { 
+        ^notify-send "Nuri config validation failed" $err_msg
+      } catch {}
+
+      return $defaults
+    }
+    return (merge-deep $defaults $parsed.value)
+  } catch { |err|
+    try { ^notify-send "Nuri config parse error" $err.msg } catch {}
+    return $defaults
+  }
+}
+
+def resolve-size [size: record, output_dim: float] {
+  match $size.kind {
+    "percentage" => { ($size.number * $output_dim / 100.0) | math round }
+    _ => { $size.number | math round }
+  }
+}
+
+def match-window [window: record, rule: record] {
+  if ($rule.exclude != null) {
+    for entry in $rule.exclude {
+      mut matched = true
+      if ($entry.app_id != null and $window.app_id != $entry.app_id) {
+        $matched = false
+      }
+      if ($entry.title != null and $window.title != $entry.title) {
+        $matched = false
+      }
+      if $matched {
+        return false
+      }
+    }
+  }
+  if ($rule.match != null) {
+    mut match_found = false
+    for entry in $rule.match {
+      mut matched = true
+      if ($entry.app_id != null and $window.app_id != $entry.app_id) {
+        $matched = false
+      }
+      if ($entry.title != null and $window.title != $entry.title) {
+        $matched = false
+      }
+      if $matched {
+        $match_found = true
+        break
+      }
+    }
+    if not $match_found {
+      return false
+    }
+  }
+
+  return true
+}
+
+def get-window-config [window: record, config: record] {
+  for rule in ($config.windows | default []) {
+    if (match-window $window $rule) {
+      return $rule
+    }
+  }
+  {
+    tiling: {
+      default_width: { number: 26.0, kind: "percentage" },
+      default_height: { number: 300, kind: "integer" }
+    },
+    floating: {
+      default_width: { number: 20, kind: "integer" },
+      default_height: { number: 50.0, kind: "percentage" },
+      on_focus: {
+        sidebar_hidden: "show_all",
+        sidebar_shown: "show_self"
+      },
+      on_blur: {
+        sidebar_hidden: "ignore",
+        sidebar_shown: "ignore"
+      },
+      on_sidebar_focus: {
+        sidebar_hidden: "ignore",
+        sidebar_shown: "hide_self"
+      },
+      on_sidebar_blur: {
+        sidebar_hidden: "show_all",
+        sidebar_shown: "ignore"
+      }
+    }
+  }
+}
+
+def get-niri-state [] {
+  let outputs = (niri msg --json outputs | from json)
+  let workspaces = (niri msg --json workspaces | from json)
+  let windows = (niri msg --json windows | from json)
+  { outputs: $outputs, workspaces: $workspaces, windows: $windows }
+}
+
+def apply-window-size [id: int, w: int, h: int] {
+  niri msg action set-window-width --id $id $"($w)"
+  niri msg action set-window-height --id $id $"($h)"
+}
+
 
 def run-niri-watcher [] {
-    print "Initializing niri-watcher!"
-    niri msg --json event-stream | lines | each { |line|
-        print $"Here's the ($line)"
-    }
+  print "Initializing niri-watcher!"
 }
 
-def run-socket-server [] { print "Initializing socket-server!" }
-
-def run-config-watcher [] {
-    print "Initializing config-watcher!"
-    let config_folder_path = ("~/.config/scripts" | path expand)
-    let config_file_path = ("~/.config/scripts/nuri.toml" | path expand)
-    watch $config_folder_path { |op, path| 
-        if $path == $config_file_path {
-            print $"A/an ($op) was performed" 
-        }
-    }
+def run-config-watcher [config_path: string] {
+  print "Initializing config-watcher!"
 }
 
-def run-manager [] {
-    print "Initializing manager!"
-    loop { sleep 1sec }
+def run-socket-server [socket_path: string] {
+  print $"Initializing socket-server at ($socket_path)!"
+}
+
+def run-manager [config_path: string] {
+  print "Initializing manager!"
+}
+
+def main [] {
 }

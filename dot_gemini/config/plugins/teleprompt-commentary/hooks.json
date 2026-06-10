@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./scripts/supervise-tool-use/supervise-tool-use.nu pre",
+            "command": "./hooks.nu pre-tool-use",
             "timeout": 10800
           }
         ]
@@ -20,10 +20,28 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./scripts/supervise-tool-use/supervise-tool-use.nu post",
+            "command": "./hooks.nu post-tool-use",
             "timeout": 10800
           }
         ]
+      }
+    ]
+  },
+  "stoppage-alerter": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./hooks.nu stop",
+        "timeout": 300
+      }
+    ]
+  },
+  "post-invocation-officer": {
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "./hooks.nu post-invocation",
+        "timeout": 300
       }
     ]
   }

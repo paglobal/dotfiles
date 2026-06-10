@@ -184,3 +184,19 @@ exit
 exit
 let raw = r#'{"step_index":211,"source":"USER_EXPLICIT","type":"USER_INPUT","status":"DONE","created_at":"2026-05-25T16:17:46Z","content":"<USER_REQUEST>\nTwo things are left, and then we're ready for the teachers to enter the results for the semester. First of all, because we haven't started with the future schema and the system in not it's desired state yet, we're going to filter out the assessments and results by today's date, meaning, we don't want to see anything past today's date (and I mean this very day, not the today that is the day we're in). We're going to do this in the +page.server.ts files of the view-results and edit-results pages. But first, we're going to implement the view-result page for the parents. It basically is going to use the ward id param to get the particular result to be viewed and pass it to the results-slip component.\n\nWe game? If we are, reload the commentary skill (there are a few updates) and let's play!\n</USER_REQUEST>\n<ADDITIONAL_METADATA>\nThe current local time is: 2026-05-25T16:17:46Z.\n</ADDITIONAL_METADATA>"}'#
 $raw | from json
+exit
+let user = { profile: { social: { github: "user123" } } }
+user.profile
+$user.profile
+$user.tame
+$user.tame?
+$user.tame.mate.rate?
+$user.tame?.mate?.rate?
+"" | path expand
+exit
+let user = { profile: { social: { github: "user123" } } }
+$user.tame? | path expand
+exit
+> ls | inspect | get name | inspect
+ls | inspect | get name | inspect
+exit
