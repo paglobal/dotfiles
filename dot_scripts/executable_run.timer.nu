@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 def main [] {
-    if not (is-terminal -o) { run.term.hold.float.sh $env.CURRENT_FILE }
+    if not (is-terminal -i ) { run.term.hold.float.sh $env.CURRENT_FILE }
     let timer_history_file = ("~/.local/state/scripts/timer-history.nuon" | path expand)
     mkdir ($timer_history_file | path dirname)
     if not ($timer_history_file | path exists) {

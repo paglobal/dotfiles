@@ -12,8 +12,7 @@ PICK_PROJECT_DIR() {
     realpath ~/.assets
     realpath ~/.gemini
     realpath ~/.scripts
-    realpath ~/.config
-    fd . ~/Documents/committed/ ~/Documents/uncommitted/ ~/Documents/antigravity/ --max-depth 1 --type d --absolute-path
+    fd . ~/Documents/committed/ ~/Documents/uncommitted/ ~/Documents/antigravity/ ~/.config --max-depth 1 --type d --absolute-path
   } | fzf >"$SELECTED_DIR_T"
 }
 export -f PICK_PROJECT_DIR
@@ -41,5 +40,5 @@ selected_cmds=$(rd_t "$SELECTED_CMDS_T")
 IFS=':' read -ra cmds <<<"$selected_cmds"
 for cmd in "${cmds[@]}"; do
   trimmed_cmd=$(echo "$cmd" | xargs)
-  [ -n "$trimmed_cmd" ] && nohup run.term.sh "cd '$selected_dir' && $trimmed_cmd ." &
+  [ -n "$trimmed_cmd" ] && nohup run.term.sh "cd '$selected_dir' && $trimmed_cmd" &
 done

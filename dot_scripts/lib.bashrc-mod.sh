@@ -20,8 +20,8 @@ alias zed="zeditor"
 alias ag="antigravity"
 
 # change default editor from nano to nvim
-export EDITOR="zeditor --wait"
-export VISUAL="zeditor --wait"
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
 
 # pnpm alias
 alias pn=pnpm

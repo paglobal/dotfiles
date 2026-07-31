@@ -5,12 +5,16 @@ x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop
 image/jpeg=org.gnome.Loupe.desktop
-text/plain=code.desktop
+text/plain=chrome-dnfpoenibinnbbckgbhendmlljoobcfg-Default.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/terminal=kitty.desktop
 application/x-terminal-emulator=kitty.desktop
 x-scheme-handler/antigravity=antigravity.desktop
+audio/mpeg=vlc.desktop
+text/markdown=code.desktop
 
 [Added Associations]
 image/jpeg=org.gnome.Loupe.desktop;
-text/plain=code.desktop;
+text/plain=code.desktop;chrome-dnfpoenibinnbbckgbhendmlljoobcfg-Default.desktop;
+audio/mpeg=vlc.desktop;
+text/markdown=code.desktop;

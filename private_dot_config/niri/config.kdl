@@ -106,10 +106,12 @@ binds {
     Mod+Q  { close-window; }
     Alt+F4 { close-window; }
 
-    Mod+H { focus-column-or-monitor-left; }
+    // Mod+H { focus-column-or-monitor-left; }
+    Mod+H { focus-column-left; }
     Mod+J { focus-window-or-workspace-down; }
     Mod+K { focus-window-or-workspace-up; }
-    Mod+L { focus-column-or-monitor-right; }
+    // Mod+L { focus-column-or-monitor-right; }
+    Mod+L { focus-column-right; }
 
     Mod+Shift+H { move-column-left-or-to-monitor-left; }
     Mod+Shift+J { move-column-to-workspace-down; }
@@ -216,4 +218,4 @@ environment {
 }
 
 include "./noctalia.kdl"
-include "./noctalia-1.kdl"
+include "./noctalia-custom.kdl"

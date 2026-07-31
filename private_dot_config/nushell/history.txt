@@ -200,3 +200,6 @@ exit
 > ls | inspect | get name | inspect
 ls | inspect | get name | inspect
 exit
+"\n" | lines
+"\n" | lines | str join "\n"
+exit

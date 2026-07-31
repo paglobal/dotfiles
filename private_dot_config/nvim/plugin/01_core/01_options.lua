@@ -1,3 +1,4 @@
+vim.loader.enable()
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
@@ -25,7 +26,6 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
--- Schedule the setting after `UiEnter` because it can increase startup-time.
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)

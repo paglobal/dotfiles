@@ -4,7 +4,6 @@ let pending_read_file_base_name = "pending-read.json"
 let user_modification_file_base_name = "user-modification.json"
 let feedback_file_base_name = "feedback.md"
 let diff_file_base_name_stem = "previous"
-let commentary_rules_file_base_name = "commentary-rules.md"
 let plugin_temp_dir_base_name = "teleprompt-commentary"
 let run_command_tool_name = "run_command"
 let manage_task_tool_name = "manage_task"
@@ -18,6 +17,9 @@ def normalize [text: string] {
 }
 
 def apply-chunk [lines: list<string>, chunk: record] {
+    if $chunk.TargetContent == $chunk.ReplacementContent {
+        return $lines
+    }
     let start = $chunk.StartLine
     let end = $chunk.EndLine
     if ($start | describe) != "int" or ($end | describe) != "int" {
@@ -40,9 +42,19 @@ def apply-chunk [lines: list<string>, chunk: record] {
         $target_block
         | str replace $chunk.TargetContent $chunk.ReplacementContent
     }
+    let trimmed_block = if ($new_block | str ends-with "\n") {
+        $new_block | str replace --regex "\n$" ""
+    } else {
+        $new_block
+    }
+    let new_lines = if ($trimmed_block | is-empty) {
+        []
+    } else {
+        $trimmed_block | split row "\n"
+    }
     (
         $before
-        | append ($new_block | lines)
+        | append $new_lines
         | append $after
     )
 }
@@ -135,9 +147,11 @@ def execute-pre-tool-use [] {
     $orig_text | save -f $diff_file_path
     $new_text | save -f $target_file_path
     if $is_new_file {
-        ^zeditor --wait --add $target_file_path
+        # ^zeditor --wait --add $target_file_path
+        ^code --wait --add --reuse-window $target_file_path
     } else {
-        ^zeditor --wait --add --diff $diff_file_path $target_file_path
+        # ^zeditor --wait --add --diff $diff_file_path $target_file_path
+        ^code --wait --add --reuse-window --diff $diff_file_path $target_file_path
     }
     let content_after_review = open --raw $target_file_path
     let user_modified = (normalize $new_text) != (normalize $content_after_review)
@@ -153,7 +167,8 @@ def execute-pre-tool-use [] {
         ""
     } else {
         "" | save -f $feedback_file_path
-        ^zeditor --wait --add $feedback_file_path
+        # ^zeditor --wait --add $feedback_file_path
+        ^code --wait --add --reuse-window $feedback_file_path
         open --raw $feedback_file_path | str trim
     }
     rm -f $feedback_file_path
@@ -202,7 +217,15 @@ def execute-post-invocation [] {
         }
         print ($response | to json)
     } else {
-        print "{}"
+        let response = {
+            injectSteps: [
+                {
+                    ephemeralMessage: $"I hope you've responded to all pending `agent:` comments in the files you edited. If so, I hope you've deleted all the `agent:` and `user:` comments."
+                }
+            ],
+            terminationBehavior: ""
+        }
+        print ($response | to json)
     }
 }
 
@@ -215,7 +238,6 @@ def execute-stop [] {
         rm -f $pending_file_path
     }
     print "{}"
-    ^notify-send -i antigravity "Execution stopped" "Return to agent manager to continue."
 }
 
 def main [event: string] {

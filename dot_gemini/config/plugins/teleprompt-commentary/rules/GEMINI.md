@@ -37,4 +37,4 @@
 
 ## 5. Cleanup
 
-- **Exit:** Remove all `agent:` and `user:` comments once implementation finishes or task shifts.
+- **Exit:** Remove all `agent:` and `user:` comments once implementation finishes or task shifts to new file.
