@@ -30,13 +30,8 @@ def main [] {
         print -n $"\r(ansi --escape "2K")Time remaining: (printf '%02d:%02d' 0 0)"
         print ""
         let duration_in_minutes = (($elapsed_seconds / 60.0) | math round -p 2)
-        let toast_payload = {
-            title: "Timer finished!"
-            type: "notice"
-            body: $"Tracked ($duration_in_minutes) mins"
-        } | to json --raw
-        qs -c noctalia-shell ipc call toast send $toast_payload
-        for i in 1..3 { ffplay -nodisp -autoexit /usr/share/sounds/freedesktop/stereo/complete.oga out> /dev/null err> /dev/null }
+        notify-send "Timer finished!" $"Tracked ($duration_in_minutes) mins"
+        # for i in 1..3 { ffplay -nodisp -autoexit /usr/share/sounds/freedesktop/stereo/complete.oga out> /dev/null err> /dev/null }
         let description = (gum write --placeholder "What happened?")
         let new_timer_history_entry = {
             description: $description

@@ -13,7 +13,9 @@ require('conform').setup {
     end
   end,
   formatters_by_ft = {
+    -- Installed and managed by mason. Check `lsp.lua`
     lua = { 'stylua' },
+    -- Installed and managed by mason. Check `lsp.lua`
     javascript = { 'prettierd', 'prettier', stop_after_first = true },
     javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
     typescript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -23,6 +25,7 @@ require('conform').setup {
     json = { 'prettierd', 'prettier', stop_after_first = true },
     jsonc = { 'prettierd', 'prettier', stop_after_first = true },
     yaml = { 'prettierd', 'prettier', stop_after_first = true },
+    -- Installed and managed by mason. Check `lsp.lua`
     python = { 'isort', 'black' },
     -- nu = { 'nufmt' },
   },

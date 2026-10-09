@@ -15,10 +15,7 @@
 ~/.config/code-flags.conf
 ~/.config/mimeapps.list
 ~/.gemini/GEMINI.md
-~/.gemini/config/hooks.json
-~/.gemini/config/scripts
 ~/.gemini/config/skills
-~/.gemini/config/plugins/teleprompt-commentary
 ~/.config/systemd
 ~/.config/nushell
 ~/.scripts

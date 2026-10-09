@@ -2,8 +2,6 @@
 adw-gtk-theme
 alacritty
 android-tools
-antigravity
-antigravity-cli
 audacity
 base
 base-devel
@@ -60,7 +58,7 @@ network-manager-applet
 networkmanager
 ninja
 niri
-noctalia-shell
+noctalia
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -70,6 +68,7 @@ ntfsprogs
 nushell
 obs-studio
 obsidian
+osu-lazer-bin
 otf-font-awesome
 papirus-icon-theme
 pavucontrol
@@ -90,6 +89,7 @@ shfmt
 smartmontools
 sof-firmware
 sudo
+tokei
 tree-sitter-cli
 ttf-jetbrains-mono-nerd
 ttf-poppins

@@ -7,27 +7,45 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "preview_tabs": {
+    "enabled": false
+  },
+  "project_panel": {
+    "entry_spacing": "comfortable"
+  },
+  "session": {
+    "trust_all_worktrees": false
+  },
+  "edit_predictions": {
+    "allow_data_collection": "no"
+  },
+  "show_edit_predictions": false,
+  "agent_servers": {
+    "antigravity-acp": {
+      "type": "registry"
+    }
+  },
   "prettier": {
-    "allowed": true
+    "allowed": true,
   },
   "format_on_save": "on",
   "when_closing_with_no_tabs": "close_window",
-  "on_last_window_closed": "platform_default",
+  "on_last_window_closed": "quit_app",
   "helix_mode": false,
   "disable_ai": true,
   "colorize_brackets": true,
   "code_lens": "off",
   "inlay_hints": {
-    "enabled": false
+    "enabled": false,
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "vim": {
     "toggle_relative_line_numbers": true,
-    "use_regex_search": false
+    "use_regex_search": false,
   },
   "relative_line_numbers": "enabled",
   "diff_view_style": "split",
@@ -64,8 +82,14 @@
   },
   "base_keymap": "VSCode",
   "agent": {
-    "enabled": false,
-    "button": false,
+    "show_turn_stats": true,
+    "auto_compact": {
+      "threshold": "70%",
+    },
+    "play_sound_when_agent_done": "when_hidden",
+    "single_file_review": true,
+    "enabled": true,
+    "button": true,
     "favorite_models": [],
     "model_parameters": [],
   },

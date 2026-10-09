@@ -86,7 +86,13 @@ local servers = {
   },
 }
 local ensure_installed = vim.tbl_keys(servers)
-table.insert(ensure_installed, 'stylua')
+vim.list_extend(ensure_installed, {
+  'stylua',
+  'prettierd',
+  'black',
+  'isort',
+  'markdownlint',
+})
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 for name, server in pairs(servers) do
   vim.lsp.config(name, server)

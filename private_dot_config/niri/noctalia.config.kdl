@@ -1,0 +1,44 @@
+binds {
+    XF86AudioRaiseVolume        allow-when-locked=true { spawn-sh "noctalia msg volume-up 10"; }
+    Ctrl+Alt+BracketRight       allow-when-locked=true { spawn-sh "noctalia msg volume-up 10"; }
+    XF86AudioLowerVolume        allow-when-locked=true { spawn-sh "noctalia msg volume-down 10"; }
+    Ctrl+Alt+BracketLeft        allow-when-locked=true { spawn-sh "noctalia msg volume-down 10"; }
+    XF86AudioMute               allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute            allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
+    XF86AudioPlay               allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+    Ctrl+Alt+P                  allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+
+    Mod+Shift+P     hotkey-overlay-title="Toggle battery manager: noctalia"        { spawn-sh "noctalia msg panel-toggle control-center power"; }
+    Mod+W           hotkey-overlay-title="Toggle network panel: noctalia"          { spawn-sh "noctalia msg panel-toggle control-center network"; }
+    Mod+Shift+B     hotkey-overlay-title="Toggle bluetooth panel: noctalia"        { spawn-sh "noctalia msg panel-toggle control-center bluetooth"; }
+    Mod+Shift+Q     hotkey-overlay-title="Toggle session menu: noctalia"           { spawn-sh "noctalia msg panel-toggle session"; }
+    Mod+Space       hotkey-overlay-title="Toggle launcher: noctalia"               { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S           hotkey-overlay-title="Toggle settings: noctalia"               { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+Shift+S     hotkey-overlay-title="Toggle bar: noctalia"                    { spawn-sh "noctalia msg bar-toggle"; }
+    Mod+M           hotkey-overlay-title="Toggle system monitor: noctalia"         { spawn-sh "noctalia msg panel-toggle control-center system"; }
+    Mod+N           hotkey-overlay-title="Toggle notifications history: noctalia"  { spawn-sh "noctalia msg panel-toggle control-center notifications"; }
+    Mod+Shift+N     hotkey-overlay-title="Dismiss active notifications: noctalia"  { spawn-sh "noctalia msg notification-clear-active"; }
+    Mod+C           hotkey-overlay-title="Toggle calendar: noctalia"               { spawn-sh "noctalia msg panel-toggle control-center calendar"; }
+    Mod+D           hotkey-overlay-title="Toggle weather: noctalia"                { spawn-sh "noctalia msg panel-toggle control-center weather"; }
+    Mod+V           hotkey-overlay-title="Toggle clipboard: noctalia"              { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+A           hotkey-overlay-title="Toggle control center: noctalia"         { spawn-sh "noctalia msg panel-toggle control-center home"; }
+}
+
+switch-events {
+    tablet-mode-on  { spawn "bash" "-c" "noctalia msg bar-show && noctalia msg dock-show"; }
+    tablet-mode-off { spawn "bash" "-c" "noctalia msg dock-hide"; }
+    lid-close       { spawn "bash" "-c" "noctalia msg session lock"; }
+}
+
+layer-rule {
+  match namespace="^noctalia-backdrop"
+  place-within-backdrop true
+}
+
+debug {
+  honor-xdg-activation-with-invalid-serial
+}
+
+spawn-at-startup "noctalia"

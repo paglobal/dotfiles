@@ -12,6 +12,8 @@ application/x-terminal-emulator=kitty.desktop
 x-scheme-handler/antigravity=antigravity.desktop
 audio/mpeg=vlc.desktop
 text/markdown=code.desktop
+x-scheme-handler/codex=chatgpt.desktop
+x-scheme-handler/discord-1216669957799018608=discord-1216669957799018608.desktop
 
 [Added Associations]
 image/jpeg=org.gnome.Loupe.desktop;

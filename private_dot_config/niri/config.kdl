@@ -5,11 +5,11 @@ input {
         natural-scroll
     }
 
-    mouse {
-        accel-speed -0.8
-    }
+    // mouse {
+    //     accel-speed 0.8
+    // }
 
-    warp-mouse-to-focus mode="center-xy-always"
+    // warp-mouse-to-focus mode="center-xy-always"
 }
 
 /-output "eDP-1" {
@@ -27,7 +27,6 @@ layout {
     gaps 10
     center-focused-column "on-overflow"
     always-center-single-column
-    empty-workspace-above-first
     background-color "transparent"
 
     preset-column-widths {
@@ -72,22 +71,50 @@ prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
-    slowdown 0.5
+    slowdown 0.25 
+}
+
+workspace "browsers"
+
+workspace "terminals"
+
+workspace "editors"
+
+workspace "misc"
+
+window-rule {
+    open-on-workspace "misc"
 }
 
 window-rule {
-    geometry-corner-radius 10
+    match app-id="google-chrome"
+    open-on-workspace "browsers"
+}
+
+window-rule {
+    match app-id="kitty"
+    open-on-workspace "terminals"
+}
+
+window-rule {
+    match app-id="dev.zed.Zed"
+    match app-id="code"
+    open-on-workspace "editors"
+}
+
+window-rule {
+    geometry-corner-radius 12
     clip-to-geometry true
     open-maximized true
-    open-maximized-to-edges false
+    open-maximized-to-edges true
     open-fullscreen false
-    default-column-display "tabbed"
 }
 
 window-rule {
     match app-id="" title="Picture in picture"
     open-floating true
     open-focused false
+    open-fullscreen false
     default-floating-position x=25 y=25 relative-to="bottom-right"
     default-window-height { proportion 0.3; }
     default-column-width  { proportion 0.25; }
@@ -143,35 +170,24 @@ binds {
     Mod+Shift+WheelScrollRight { move-column-right; }
     Mod+Shift+WheelScrollLeft  { move-column-left; }
 
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
+    Mod+1 { focus-workspace "browsers"; }
+    Mod+2 { focus-workspace "terminals"; }
+    Mod+3 { focus-workspace "editors"; }
+    Mod+4 { focus-workspace "misc"; }
 
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace "browsers"; }
+    Mod+Shift+2 { move-column-to-workspace "terminals"; }
+    Mod+Shift+3 { move-column-to-workspace "editors"; }
+    Mod+Shift+4 { move-column-to-workspace "misc"; }
 
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
-    Mod+Z       { switch-preset-column-width; }
-    Mod+Shift+Z { switch-preset-window-height; }
+    Mod+X       { switch-preset-column-width; }
+    Mod+Z       { switch-preset-window-height; }
     Mod+F       { toggle-windowed-fullscreen; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+M       { maximize-window-to-edges; }
-    Mod+Shift+M { maximize-column; }
+    Mod+Shift+M       { maximize-window-to-edges; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -218,4 +234,4 @@ environment {
 }
 
 include "./noctalia.kdl"
-include "./noctalia-custom.kdl"
+include "./noctalia.config.kdl"

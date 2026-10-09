@@ -1,0 +1,74 @@
+[audio]
+enable_overdrive = true
+
+[backdrop]
+enabled = false
+blur_intensity = 0.5
+tint_intensity = 0.3
+
+[bar.default]
+font_family = "Ubuntu"
+font_weight = 600
+margin_ends = 50
+widget_spacing = 10
+
+[battery]
+warning_threshold = 40
+
+[calendar]
+enabled = true
+
+[calendar.account.jackamoah_pa]
+name = "My Calendar"
+type = "google"
+
+[dock]
+show_dots = true
+
+[lockscreen]
+fingerprint = false
+
+[osd]
+position = "bottom_center"
+
+[plugin_settings."noctalia/screen_recorder"]
+audio_source = "both"
+
+[plugins]
+enabled = ["noctalia/world_clock", "noctalia/screen_recorder", "noctalia/timer"]
+
+[shell]
+avatar_path = "~/.assets/images/me-half-dp.png"
+font_family = "Ubuntu"
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
+corner_radius_scale = 1.0
+
+[shell.launcher.providers.emoji]
+global = true
+
+[shell.panel]
+open_near_click_control_center = true
+open_near_click_session = true
+
+[shell.screenshot]
+confirm_region = true
+
+[theme]
+pure_black_dark = true
+source = "wallpaper"
+wallpaper_scheme = "m3-monochrome"
+
+[theme.templates]
+builtin_ids = ["cava", "gtk3", "gtk4", "niri", "qt"]
+
+[wallpaper]
+directory = "~/.assets/images/wallpapers"
+
+[wallpaper.default]
+path = "/home/paglobal/.assets/images/wallpapers/black-and-white-3840x2160-21293.jpg"
+
+[notification]
+offset_x = 22
+offset_y = 20

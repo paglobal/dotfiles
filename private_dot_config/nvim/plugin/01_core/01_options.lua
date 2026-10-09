@@ -29,3 +29,33 @@ vim.opt.softtabstop = 2
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
+local signs = {
+  ERROR = '󰅚 ',
+  WARN = '󰀪 ',
+  INFO = '󰋽 ',
+  HINT = '󰌶 ',
+}
+local diagnostic_signs = {}
+for severity, icon in pairs(signs) do
+  diagnostic_signs[vim.diagnostic.severity[severity]] = icon
+end
+vim.diagnostic.config {
+  signs = {
+    text = diagnostic_signs,
+  },
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  virtual_text = true,
+  virtual_lines = false,
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float {
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      }
+    end,
+  },
+}
