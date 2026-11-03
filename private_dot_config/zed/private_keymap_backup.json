@@ -1,10 +1,3 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "context": "showing_completions",
@@ -68,7 +61,6 @@
       "r": "project_panel::Rename",
       "o": "project_panel::Open",
       "p": "project_panel::Paste",
-      // TODO: Not working. Revisit this and maybe file issue
       "u": "project_panel::Undo",
       "ctrl-r": "project_panel::Redo",
     },
@@ -77,6 +69,13 @@
     "context": "VimControl && !menu",
     "unbind": {
       "ctrl-d": "vim::ScrollDown",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "j": ["vim::Down", { "displayLines": true }],
+      "k": ["vim::Up", { "displayLines": true }],
     },
   },
 ]

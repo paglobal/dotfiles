@@ -1,0 +1,35 @@
+{
+  "lastChangelogVersion": "1.5.0",
+  "theme": "light/dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "low",
+  "steeringMode": "one-at-a-time",
+  "transport": "auto",
+  "hideThinkingBlock": false,
+  "followUpMode": "one-at-a-time",
+  "tuiMode": "fullscreen",
+  "fullscreenScrollbar": "always",
+  "enabledModels": [
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6-astra"
+  ],
+  "fullscreenExitOutput": "resume-hint",
+  "showCacheMissNotices": true,
+  "treeFilterMode": "default",
+  "defaultTools": [
+    "+codemode",
+    "+grep",
+    "+find",
+    "+ls"
+  ],
+  "fullscreenCopyOnSelect": true,
+  "packages": [
+    "git:github.com/diligentworkman/pi-teleprompt-commentary",
+    "npm:pi-web-access"
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0"
+  }
+}

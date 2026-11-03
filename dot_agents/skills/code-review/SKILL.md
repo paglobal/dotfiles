@@ -10,6 +10,9 @@ Write code review comments terse and actionable. One line per finding. Location,
 
 ## Rules
 
+- Verify findings against code and context. State concrete impact; no speculative bugs or fixes.
+- Missing retry isn't automatically a bug. Check retry safety and operation semantics before recommending retries.
+
 **Format:** `L<line>: <problem>. <fix>.` — or `<file>:L<line>: ...` when reviewing multi-file diffs.
 
 **Severity prefix (optional, when mixed):**
@@ -43,7 +46,7 @@ Write code review comments terse and actionable. One line per finding. Location,
 
 ❌ "Have you considered what happens if the API returns a 429? I think we should probably handle that case."
 
-✅ `L23: 🟡 risk: no retry on 429. Wrap in withBackoff(3).`
+✅ `L23: ❓ q: GET fails immediately on 429. Should this read retry transient rate limits?`
 
 ## Auto-Clarity
 

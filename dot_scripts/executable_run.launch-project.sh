@@ -11,6 +11,7 @@ PICK_PROJECT_DIR() {
   {
     realpath ~/.assets
     realpath ~/.gemini
+    realpath ~/.pi
     realpath ~/.scripts
     fd . ~/Documents/committed/ ~/Documents/uncommitted/ ~/Documents/antigravity/ ~/.config --max-depth 1 --type d --absolute-path
   } | fzf >"$SELECTED_DIR_T"

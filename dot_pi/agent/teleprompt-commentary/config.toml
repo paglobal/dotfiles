@@ -1,0 +1,38 @@
+[[handlers.configuration_editor]]
+action = ["zeditor", "--wait", "--existing", { var = "configuration_file_path" }]
+
+[[handlers.workspace_opener]]
+action = ["zeditor", "--add", { var = "workspace_directory_path" }]
+
+[[handlers.command_editor]]
+# action = ["zeditor", "--wait", "--existing", { var = "command_file_path" }]
+action = "prompt"
+
+[[handlers.new_file_editor]]
+action = ["zeditor", "--wait", "--existing", { var = "new_file_path" }]
+
+[[handlers.diff_editor]]
+action = [
+  "zeditor",
+  "--wait",
+  "--existing",
+  "--diff",
+  { var = "old_content_file_path" },
+  { var = "new_content_file_path" },
+]
+
+[[hooks.tool_permission_request]]
+action = [
+  "notify-send",
+  "Tool Permission Request",
+  { var = "tool_name", append = " tool" }
+]
+
+[[hooks.assistant_message_end]]
+action = ["notify-send", "Agent Says...", { var = "assistant_message_text" }]
+
+[[hooks.agent_settled]]
+action = ["notify-send", "Agent Settled", "Waiting for you..."]
+
+[[hooks.agent_start]]
+action = ["notify-send", "Agent Started", "Work in progress..."]

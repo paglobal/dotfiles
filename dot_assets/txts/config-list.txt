@@ -14,8 +14,13 @@
 ~/.config/chrome-flags.conf
 ~/.config/code-flags.conf
 ~/.config/mimeapps.list
-~/.gemini/GEMINI.md
+~/.pi/agent/teleprompt-commentary
+~/.pi/agent/AGENTS.md
+~/.pi/agent/skills
+~/.pi/agent/settings.json
 ~/.gemini/config/skills
 ~/.config/systemd
 ~/.config/nushell
 ~/.scripts
+~/.agents
+~/.gemini/config/AGENTS.md
